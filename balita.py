@@ -21,7 +21,7 @@ class BalitaScreen(Screen):
         self.load_data()  # Memanggil fungsi untuk memuat data balita dari Firebase
 
     def load_data(self):
-    # Bersihkan data sebelumnya
+        # Bersihkan data sebelumnya
         self.ids.data_container.clear_widgets()
         database = App.get_running_app().database
         data_balita = database.db.child("balita").child("user1").get()
@@ -35,10 +35,30 @@ class BalitaScreen(Screen):
                     container = ClickableBox(orientation='vertical', padding=10, size_hint_y=None, height=170)
                     container.balita_info = info  # Menyimpan info balita untuk diakses saat diklik
                     container.bind(on_release=self.show_details)  # Tambahkan event on_release untuk klik
+                    
 
-                    # Membuat label ringkasan data balita
-                    summary = Label(text=f"Nama: {info['nama']}\nUmur: {info['umur']}", color=(0, 0, 0, 1))
+                    # Canvas untuk latar belakang ClickableBox
+                    with container.canvas.before:
+                        from kivy.graphics import Color, Rectangle
+                        Color(0.9, 0.9, 0.9, 1)  # Warna latar abu-abu muda
+                        Rectangle(pos=container.pos, size=container.size)
+
+                    # Membuat label ringkasan data balita dengan styling
+                    summary = Label(
+                        text=f"Nama: {info['nama']}\nUmur: {info['umur']}",
+                        color=(0, 0, 0, 1),
+                        bold=True,
+                        font_size=20
+                    )
                     container.add_widget(summary)
+
+                    # Tambahan label telepon atau info lain
+                    summary2 = Label(
+                        text=f"Telepon: {info['telepon']}",
+                        color=(0, 0, 0, 1),
+                        font_size=20
+                    )
+                    container.add_widget(summary2)
 
                     # Tambahkan container ke data_container utama
                     self.ids.data_container.add_widget(container)

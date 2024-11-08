@@ -5,6 +5,8 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.animation import Animation
+from kivy.clock import Clock
 
 class LoginScreen(Screen):
     def login(self):
@@ -14,9 +16,23 @@ class LoginScreen(Screen):
         # Validasi username dan password dengan data dari Firebase
         if self.validate_credentials(username, password):
             App.get_running_app().user = username  # Simpan username di MainApp
+            self.ids.popup_box.opacity = 0
+            print( 'show pop up')
+
+            # Animasi fade-in selama 1 detik
+            anim_appear = Animation(opacity=1, duration=1.0)
+            anim_appear.start(self.ids.popup_box)
+
+            # Menjadwalkan penghilangan popup setelah 2 detik
+            Clock.schedule_once(self.hide_popup, 2)
+            
             self.manager.current = 'dashboard_screen'  # Alihkan ke dashboard
         else:
             self.show_popup("Login gagal! Periksa username dan password.")
+    def hide_popup(self, dt):
+            # Animasi fade-out selama 1 detik
+            anim_disappear = Animation(opacity=0, duration=1.0)
+            anim_disappear.start(self.ids.popup_box)
 
     def validate_credentials(self, username, password):
         # Ambil data login dari Firebase

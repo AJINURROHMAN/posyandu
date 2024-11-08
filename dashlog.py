@@ -8,11 +8,14 @@ class DashlogScreen(Screen):
 
     def on_enter(self):
         # Pastikan popup muncul setelah layar dimasukkan
+        print( 'show pop up on_enter')
+        
         Clock.schedule_once(self.show_popup, 0)  # Delay sedikit agar popup dapat ditampilkan setelah layar muncul
 
     def show_popup(self, dt):
         # Mengatur opacity popup ke 0 (tersembunyi)
         self.ids.popup_box.opacity = 0
+        print( 'show pop up')
 
         # Animasi fade-in selama 1 detik
         anim_appear = Animation(opacity=1, duration=1.0)
@@ -20,7 +23,7 @@ class DashlogScreen(Screen):
 
         # Menjadwalkan penghilangan popup setelah 2 detik
         Clock.schedule_once(self.hide_popup, 2)
-
+        print(' test pop up hide ')
     def hide_popup(self, dt):
         # Animasi fade-out selama 1 detik
         anim_disappear = Animation(opacity=0, duration=1.0)
