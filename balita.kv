@@ -1,0 +1,219 @@
+<BalitaScreen>:
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Gambar latar belakang
+        Image:
+            source: 'assets/ber.png'
+            allow_stretch: True
+            keep_ratio: True
+            opacity: 0.5
+
+        Button:
+            background_normal: 'assets/hamb.png'  # Gambar ikon hamburger
+            background_down: 'assets/hamb.png'
+            size_hint: None, None
+            size: 70, 70
+            pos: 20, root.height - 70
+            allow_stretch: True
+            keep_ratio: True
+            on_press: app.root.current = 'menu_screen'
+
+        # Menambahkan label "BALITA" di atas tengah
+        Label:
+            text: "BALITA"
+            color: 0, 0, 0, 1
+            font_size: 24
+            size_hint_y: None
+            height: 40
+            pos_hint: {"center_x": 0.5, "top": 0.92}
+
+        # Menempatkan label di tengah atas dengan garis di bawahnya
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 40
+            pos_hint: {"center_x": 0.5, "top": 0.85}
+
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Line:
+                    points: [self.x, self.y, self.x + self.width, self.y]
+                    width: 1.5
+
+            Label:
+                text: "Nama"
+                color: 0, 0, 0, 1
+                size_hint_x: None
+                width: 75
+
+            Label:
+                text: "Umur"
+                color: 0, 0, 0, 1
+                size_hint_x: None
+                width: 75
+
+            Label:
+                text: "Ibu"
+                color: 0, 0, 0, 1
+                size_hint_x: None
+                width: 75
+
+            Label:
+                text: "Jenis Kelamin"
+                color: 0, 0, 0, 1
+                size_hint_x: None
+                width: 120
+
+            Label:
+                text: "Alamat"
+                color: 0, 0, 0, 1
+                size_hint_x: None
+                width: 100
+
+        # GridLayout untuk data balita
+        GridLayout:
+            id: data_grid
+            cols: 5
+            size_hint_y: None
+            height: self.minimum_height
+            pos_hint: {"center_x": 0.5, "top": 0.78}
+
+            # Tambahkan data balita
+            # Baris 1
+            Label:
+                text: "Andi"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1  # Latar belakang untuk baris genap
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "2 Tahun"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1  # Latar belakang untuk baris genap
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "Siti"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1  # Latar belakang untuk baris genap
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "Laki-laki"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1  # Latar belakang untuk baris genap
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "Jalan Mawar No. 5"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 0.9, 0.9, 0.9, 1  # Latar belakang untuk baris genap
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            # Baris 2 (berwarna berbeda untuk perbedaan visual)
+            Label:
+                text: "Budi"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # Latar belakang untuk baris ganjil
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "3 Tahun"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # Latar belakang untuk baris ganjil
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "Dewi"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # Latar belakang untuk baris ganjil
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "Perempuan"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # Latar belakang untuk baris ganjil
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                text: "Jalan Melati No. 10"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 40
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # Latar belakang untuk baris ganjil
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+        # Tombol TAMBAH di pojok kanan agak bawah
+        Button:
+            text: "TAMBAH"
+            size_hint: None, None
+            size: 100, 50
+            pos_hint: {"right": 0.9, "y": 0.1}
+            background_color: 0.2, 0.6, 0.2, 1
+            on_release: app.root.current = 'tambah_screen'
+            color: 1, 1, 1, 1

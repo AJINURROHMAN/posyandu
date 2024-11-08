@@ -1,0 +1,76 @@
+<TambahScreen>:
+    canvas.before:
+        Color:
+            rgb: 1, 1, 1  # Warna putih (RGB: 1, 1, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # Gambar latar belakang
+     # Atur transparansi (0.0 - 1.0)
+
+    FloatLayout:
+        # Gambar tombol "back" di bagian atas agak ke kanan dan bawah
+        Button:
+            background_normal: 'assets/back.png'  # Ganti dengan path gambar back Anda
+            background_down: 'assets/back.png'  # Ganti dengan path gambar back Anda
+            size_hint: 8, 8
+            size: 35, 35  # Ukuran gambar back
+            pos: 20, root.height - 70  # Posisi gambar lebih ke kanan dan lebih ke bawah
+            allow_stretch: True
+            on_release:app.root.current:'balita_screen'
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.9, 0.6  # Lebar 90% dari layar, tinggi 60% dari layar
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}  # Mengatur posisi agak di atas tengah
+            padding: 30
+            spacing: 20
+
+            Label:
+                text: 'TAMBAH'  # Teks di atas form
+                font_size: 28
+                size_hint_y: None
+                height: 50
+                color: 0, 0, 0, 1  # Warna teks hitam
+
+            Label:
+                text: 'Form Tambah Data'
+                font_size: 24
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: 50
+
+            TextInput:
+                id: nama_input
+                hint_text: 'Nama'
+                size_hint_y: None
+                height: 40
+
+            TextInput:
+                id: umur_input
+                hint_text: 'Umur'
+                size_hint_y: None
+                height: 40
+                input_filter: 'int'  # Membatasi input hanya untuk angka
+
+            TextInput:
+                id: ibu_input
+                hint_text: 'Nama Ibu'
+                size_hint_y: None
+                height: 40
+
+            TextInput:
+                id: jk_input
+                hint_text: 'Jenis Kelamin (Laki-laki/Perempuan)'
+                size_hint_y: None
+                height: 40
+
+            Button:
+                text: 'Simpan'
+                size_hint: None, None
+                size: 100, 40  # Membuat tombol lebih kecil
+                pos_hint: {'right': 0.95, 'y': 0.01}  # Menempatkan di pojok kanan bawah, lebih tinggi sedikit
+                on_release: app.root.current :'balita_screen'
+                
+                  

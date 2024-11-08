@@ -1,0 +1,64 @@
+<BerandaScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [10, 10, 10, 10]  # Padding di sekitar layout
+        spacing: 10  # Jarak antara elemen
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            id: top_box  # Menambahkan ID untuk mengakses BoxLayout ini dari Python
+            size_hint_y: 0.10  # Ukuran tinggi box (10% dari layar)
+            padding: [10, 10, 10, 10]
+            opacity: 0  # Awalnya transparan untuk animasi masuk
+            pos_hint: {'middle': 5.9}  # Menurunkan posisi pop-up lebih rendah dari sebelumnya
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 1, 1  # Warna kotak (biru)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 50, 50]  # Radius sudut membulat
+            
+            # Label dengan teks di tengah
+            Label:
+                text: "Login Berhasil"
+                color: 1, 1, 1, 1  # Warna teks (putih)
+                halign: 'center'
+                valign: 'middle'
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.size  # Mengatur teks agar menyesuaikan ukuran
+
+        BoxLayout:
+            orientation: 'horizontal'  # Mengubah orientasi menjadi horizontal
+            size_hint_y: None
+            height: 20  # Tinggi untuk bar atas
+
+            Button:
+                background_normal: 'assets/hamb.png'  # Gambar ikon hamburger
+                background_down: 'assets/hamb.png'  # Gambar saat tombol ditekan (opsional)
+                size_hint: (None, None)  # Menggunakan ukuran spesifik
+                size: (80, 80)  # Ukuran tombol 80x80
+                on_press: app.root.current = 'menu_screen'
+                   
+            Label:
+                text: "Selamat Datang di Aplikasi Posyandu"
+                font_size: 24
+                color: 0, 0, 0, 1  # Warna teks hitam
+                bold: True
+                size_hint_y: None
+                height: self.texture_size[1]  # Mengatur tinggi label berdasarkan ukuran teks
+        Image:
+            source: 'assets/background.png'  # Ganti dengan jalur gambar yang diinginkan
+            size_hint_y: None
+            height: 300  # Tentukan tinggi gambar
+            allow_stretch: True  # Mengizinkan gambar untuk di-stretch sesuai ukuran widget
+            keep_ratio: True  # Memastikan rasio gambar tetap terjaga
+        Widget:
+            size_hint_y: None 
+            height: 550  # Tinggi widget berikutnya di bawah bar atas

@@ -1,0 +1,119 @@
+<MenuScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [0, 0, 0, 0]
+        spacing: 10
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Warna latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Membuat kotak setengah dari ukuran layar
+        BoxLayout:
+            size_hint_y: 0.5  # Setengah dari tinggi layar
+            size_hint_x: 0.5  # Lebar 50% dari layar
+            orientation: 'vertical'
+            padding: [0, 0, 0, 0]
+            canvas.before:
+                Color:
+                    rgba: 0, 191, 255, 1  # Warna abu-abu untuk kotak
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 0, 0]  # Sudut tidak melengkung
+            
+            # Bagian untuk ikon hamburger di pojok kiri atas
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '50dp'
+                padding: [15, 15, 15, 15]
+                
+                # Menempatkan tombol gambar di pojok kiri atas
+                Button:
+                    background_normal: 'assets/back.png'  # Ganti dengan jalur file gambar
+                    background_down: 'assets/back.png'
+                    size_hint: None, None
+                    size: '70', '70'
+                    pos_hint: {'center_y': 0.5}
+                    on_release: app.root.current = 'beranda_screen'
+
+            # Mengganti Label dengan Button
+            Button:
+                text: "Dashboard"
+                font_size: '12sp'
+                color: (0, 0, 0, 1)
+                size_hint_y: None
+                halign: 'left'
+                text_size: self.size
+                padding: [15, 0, 0, 0]  # Memberikan jarak pada teks dari kiri
+                height: '40dp'
+                background_color: (0, 0, 0, 0)  # Tombol transparan
+                on_press: app.root.current = 'dashboard_screen'
+
+            Button:
+                text: "Balita"
+                font_size: '12sp'
+                color: (0, 0, 0, 1)
+                size_hint_y: None
+                halign: 'left'
+                text_size: self.size
+                padding: [15, 0, 0, 0]  # Memberikan jarak pada teks dari kiri
+                height: '40dp'
+                background_color: (0, 0, 0, 0)  # Tombol transparan
+                on_release: app.root.current = 'balita_screen'# Tambahkan fungsi `on_press` jika diperlukan
+
+            Button:
+                text: "Perkembangan Balita"
+                font_size: '12sp'
+                color: (0, 0, 0, 1)
+                size_hint_y: None
+                halign: 'left'
+                text_size: self.size
+                padding: [15, 0, 0, 0]  # Memberikan jarak pada teks dari kiri
+                height: '40dp'
+                background_color: (0, 0, 0, 0)  # Tombol transparan
+                # Tambahkan fungsi `on_press` jika diperlukan
+
+            Button:
+                text: "Ibu Hamil"
+                font_size: '12sp'
+                color: (0, 0, 0, 1)
+                size_hint_y: None
+                halign: 'left'
+                text_size: self.size
+                padding: [15, 0, 0, 0]  # Memberikan jarak pada teks dari kiri
+                height: '40dp'
+                background_color: (0, 0, 0, 0)  # Tombol transparan
+                # Tambahkan fungsi `on_press` jika diperlukan
+
+            Button:
+                text: "Laporan Bulanan"
+                font_size: '12sp'
+                color: (0, 0, 0, 1)
+                size_hint_y: None
+                halign: 'left'
+                text_size: self.size
+                padding: [15, 0, 0, 0]  # Memberikan jarak pada teks dari kiri
+                height: '40dp'
+                background_color: (0, 0, 0, 0)  # Tombol transparan
+                # Tambahkan fungsi `on_press` jika diperlukan
+
+            Button:
+                text: "Profil"
+                font_size: '12sp'
+                color: (0, 0, 0, 1)
+                size_hint_y: None
+                halign: 'left'
+                text_size: self.size
+                padding: [15, 0, 0, 0]  # Memberikan jarak pada teks dari kiri
+                height: '40dp'
+                background_color: (0, 0, 0, 0)  # Tombol transparan
+                on_release: app.root.current = 'profil_screen'
+
+            Widget:
+                size_hint_y: None
+                height: 500

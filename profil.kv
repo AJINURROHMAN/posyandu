@@ -1,0 +1,113 @@
+<ProfilScreen>:
+    FloatLayout:  # Menggunakan FloatLayout untuk memungkinkan posisi absolut
+        BoxLayout:
+            orientation: 'vertical'
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, 1  # Warna putih
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Image:
+                padding: [30, 30, 30, 30]
+                source: 'assets/foto.png'  # Ganti dengan path gambar Anda
+                size_hint: None, None
+                size: '90dp', '90dp'  # Ukuran gambar
+                pos_hint: {'center_x': 0.5, 'y': 0.5}  # Mengatur posisi lebih ke bawah pada window 360x640
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 20
+                spacing: 20
+
+                # BoxLayout untuk Nama
+                BoxLayout:
+                    size_hint_y: None
+                    height: '40dp'
+                    padding: [5, 5]
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 1  # Warna garis bawah hitam
+                        Line:
+                            points: [self.x, self.y, self.right, self.y]  # Garis di bawah
+                            width: 1.5  # Ketebalan garis
+
+                    Label:
+                        text: 'Nama: John Doe'  # Ganti dengan nama yang sesuai
+                        color: (0, 0, 0, 1)
+                        size_hint_x: None
+                        width: self.parent.width
+                        halign: 'left'
+                        valign: 'middle'
+                        text_size: self.size  # Ukuran teks mengikuti ukuran widget
+                        padding_x: 10  # Jarak padding dari sisi kiri
+
+                # BoxLayout untuk Email
+                BoxLayout:
+                    size_hint_y: None
+                    height: '40dp'
+                    padding: [5, 5]
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 1  # Warna garis bawah hitam
+                        Line:
+                            points: [self.x, self.y, self.right, self.y]  # Garis di bawah
+                            width: 1.5  # Ketebalan garis
+
+                    Label:
+                        text: 'Email: john.doe@example.com'  # Ganti dengan email yang sesuai
+                        color: (0, 0, 0, 1)
+                        size_hint_x: None
+                        width: self.parent.width
+                        halign: 'left'
+                        valign: 'middle'
+                        text_size: self.size
+                        padding_x: 10  # Jarak padding dari sisi kiri
+
+                # BoxLayout untuk Nomor Telepon
+                BoxLayout:
+                    size_hint_y: None
+                    height: '40dp'
+                    padding: [5, 5]
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 0, 1  # Warna garis bawah hitam
+                        Line:
+                            points: [self.x, self.y, self.right, self.y]  # Garis di bawah
+                            width: 1.5  # Ketebalan garis
+
+                    Label:
+                        text: 'Nomor Telepon: 08123456789'  # Ganti dengan nomor telepon yang sesuai
+                        color: (0, 0, 0, 1)
+                        size_hint_x: None
+                        width: self.parent.width
+                        halign: 'left'
+                        valign: 'middle'
+                        text_size: self.size
+                        padding_x: 10  # Jarak padding dari sisi kiri
+
+                Button:
+                    text: 'Log Out'
+                    size_hint_x: 0.5
+                    background_color: (0, 0.5, 1, 0.9) 
+                    size_hint_y: None
+                    pos_hint: {'center_x': 0.5}
+                    height: '40dp'  # Menggunakan 'dp' untuk ukuran
+                    on_press: app.root.current = 'logout_screen'  # Ganti dengan metode yang sesuai
+
+                Widget:
+                    size_hint_y: None
+                    height: 250  # Pastikan Widget ini berada di bawah Button
+
+        # Tambahkan gambar ikon di pojok kanan atas
+        Image:
+            source: 'assets/edit.png'  # Ganti dengan path gambar ikon Anda
+            size_hint: None, None
+            size: '50dp', '50dp'
+            pos_hint: {'right': 1, 'top': 1}
+        Image:
+            source: 'assets/edit.png'  # Ganti dengan path gambar ikon Anda
+            size_hint: None, None
+            size: '50dp', '50dp'
+            pos_hint: {'left': 1, 'top': 1}

@@ -1,0 +1,121 @@
+<DashboardScreen>:
+    FloatLayout:
+        # Tampilan utama
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 1
+
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # Bagian atas untuk hamburger menu
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '50dp'
+                padding: [15, 15, 15, 15]
+
+                Button:
+                    background_normal: 'assets/hamb.png'
+                    size_hint: None, None
+                    size: '70', '70'
+                    pos_hint: {'center_y': 0.5}
+                    on_release: app.root.current = 'menu_screen'
+
+            # Bagian untuk dashboard
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.3
+                padding: [20, 10, 20, 10]
+                spacing: 30
+
+                # Kotak pertama untuk jumlah balita
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: 0.4, 1  # Ukuran kotak lebih kecil
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0.3, 0.8, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20, 20, 20, 20]
+
+                    Image:
+                        source: 'assets/3.png'
+                        size_hint_y: 0.3  # Ukuran gambar lebih kecil
+                        allow_stretch: True
+                        keep_ratio: False
+                        radius: [20, 20, 0, 0]
+
+                    Label:
+                        text: "Jumlah Balita"
+                        size_hint_y: 0.10  # Ukuran label lebih kecil
+                        font_size: '14sp'  # Ukuran font lebih kecil
+
+                # Kotak kedua untuk jumlah ibu hamil
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: 0.4, 1  # Ukuran kotak lebih kecil
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0.3, 0.8, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20, 20, 20, 20]
+
+                    Image:
+                        source: 'assets/8.png'
+                        size_hint_y: 0.3  # Ukuran gambar lebih kecil
+                        allow_stretch: True
+                        radius: [20, 20, 0, 0]
+                        keep_ratio: False
+
+                    Label:
+                        text: "Jumlah Ibu Hamil"
+                        size_hint_y: 0.10  # Ukuran label lebih kecil
+                        font_size: '14sp'  # Ukuran font lebih kecil
+
+            # Bagian bawah untuk kalender
+            BoxLayout:
+                size_hint_y: 0.6
+                padding: [20, 10, 20, 10]
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                Image:
+                    source: 'assets/date.png'
+                    allow_stretch: True
+                    keep_ratio: False
+
+        # Popup mengambang di bagian atas layar
+        BoxLayout:
+            id: popup_box
+            orientation: 'vertical'
+            size_hint: 0.8, None
+            height: '60dp'
+            pos_hint: {'top': 1.0, 'center_x': 0.5}
+            opacity: 0
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20, 20, 20, 20]
+
+            Label:
+                text: "Login Berhasil"
+                color: 1, 1, 1, 1
+                bold: True
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size

@@ -1,0 +1,78 @@
+<LogoutScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [20, 20, 20, 20]
+        
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Kotak biru di atas dengan teks "Logout Berhasil"
+        
+
+        # Bagian untuk menampilkan gambar dalam lingkaran
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.4
+            padding: [20, 20]
+            spacing: 10
+            # Menggunakan Widget untuk mengatur posisi gambar
+            Widget:
+                size_hint_y: None
+                height: '20dp'  # Jarak dari atas
+
+            # Kotak untuk gambar lingkaran
+            FloatLayout:
+                size_hint_y: None
+                height: '200dp'
+                canvas:
+                    Color:
+                        rgba: 1, 1, 1, 1  # Latar belakang putih
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+
+                Image:
+                    source: 'assets/ber.png'  # Ganti dengan jalur gambar Anda
+                    size_hint: None, None
+                    size: '150dp', '150dp'
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    allow_stretch: True
+                    keep_ratio: True
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Mengatur warna gambar
+                        Ellipse:
+                            pos: (self.x, self.y)
+                            size: (self.width, self.height)
+
+            Label:
+                text: "Anda telah berhasil keluar."
+                color: (0, 0, 0, 1)  # Warna teks hitam
+                size_hint_y: None
+                height: '30dp'
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                pos_hint: {'center_x': 0.5}
+            Widget:
+                size_hint_y: None
+                height: 200 # Sesuaikan tinggi widget kosong untuk memberi ruang di bawah
+
+
+        # Tombol untuk kembali ke login screen
+        Button:
+            text: "Kembali ke Login"
+            size_hint_y: None
+            height: '50dp'
+            background_color: 0, 0.5, 1, 1
+            color: 1, 1, 1, 1  # Warna teks putih
+            on_release: app.root.current = 'login_screen'  # Metode yang memindahkan ke layar login
+
+        Widget:
+            size_hint_y: None
+            height: 100  # Sesuaikan tinggi widget kosong untuk memberi ruang di bawah
+
