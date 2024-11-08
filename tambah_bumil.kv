@@ -1,4 +1,4 @@
-<TambahScreen>:
+<TambahBumilScreen>:
     canvas.before:
         Color:
             rgb: 0.95, 0.95, 0.95  # Latar belakang putih terang
@@ -14,7 +14,7 @@
             size: 35, 35
             pos: 20, root.height - 70
             allow_stretch: True
-            on_release: app.root.current = 'balita'
+            on_release: app.root.current = 'balita_screen'
 
         BoxLayout:
             orientation: 'vertical'
@@ -38,23 +38,23 @@
                 color: 0.2, 0.2, 0.2, 1  # Warna teks abu-abu tua
 
             CustomTextInput:
-                id: nama
+                id: nama_bumil
                 hint_text: 'Nama'
                 multiline: False
 
             CustomTextInput:
-                id: ibu
-                hint_text: 'Ibu'
+                id: suami_bumil
+                hint_text: 'Suami'
                 multiline: False
 
             CustomTextInput:
-                id: umur
-                hint_text: 'Umur'
+                id: nik_bumil
+                hint_text: 'NIK'
                 multiline: False
 
             CustomTextInput:
-                id: telepon
-                hint_text: 'Telepon'
+                id: telepon_bumil
+                hint_text: 'Telepone'
                 multiline: False
 
             BoxLayout:
@@ -66,7 +66,7 @@
                     text: 'Simpan'
                     size_hint_x: None
                     width: 100
-                    on_release: root.simpan_data()  # Memanggil metode simpan_data dari TambahScreen
+                    on_release: root.simpan_data()
                     background_color: (0, 0, 0, 0)
                     color: 1, 1, 1, 1
                     canvas.before:
@@ -82,7 +82,7 @@
                     size_hint_x: None
                     width: 100
                     on_release: app.root.current = 'balita_screen'
-                    background_color: (0, 0, 0, 0)
+                    background_color: ( 0, 0, 0, 0)
                     color: 1, 1, 1, 1
                     canvas.before:
                         Color:
@@ -91,3 +91,34 @@
                             pos: self.pos
                             size: self.size
                             radius: [20]
+
+<CustomTextInput@TextInput>:
+    canvas.before:
+        Color:
+            rgba: self._bg_color
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [20]
+
+        Color:
+            rgba: self._border_color
+        Line:
+            width: 1
+            rounded_rectangle: (self.x, self.y, self.width, self.height, 20)
+
+    foreground_color: 0.2, 0.2, 0.2, 1  # Warna teks abu-abu tua
+    padding: [15, 10]
+    background_color: 0, 0, 0, 0
+    font_size: 16
+    size_hint_y: None
+    height: 45
+
+    # Properti untuk warna fokus
+    _bg_color: (0.95, 0.95, 0.95, 1)
+    _border_color: (0.7, 0.7, 0.7, 1)
+
+    # Animasi warna saat fokus
+    on_focus:
+        if self.focus: self._border_color = (0.2, 0.6, 1, 1)
+        else: self._border_color = (0.7, 0.7, 0.7, 1)

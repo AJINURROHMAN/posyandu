@@ -6,21 +6,7 @@ from kivy.animation import Animation
 
 # Definisikan layar LogoutScreen
 class LogoutScreen(Screen):
-    class LogoutScreen(Screen):
-    def on_enter(self):
-        # Mengatur opacity gambar menjadi 0 sebelum animasi dimulai
-        self.ids.logout_image.opacity = 0
-        # Jalankan animasi fade-in
-        anim = Animation(opacity=1, duration=1)  # Durasi 1 detik
-        anim.start(self.ids.logout_image)
-        
-        # Bind animasi fade-out setelah fade-in selesai
-        anim.bind(on_complete=lambda *args: self.fade_out())
-
-    def fade_out(self):
-        # Animasi fade out
-        anim = Animation(opacity=0, duration=1)  # Durasi 1 detik
-        anim.start(self.ids.logout_image)
+   pass
 
 
 class LoginScreen(Screen):

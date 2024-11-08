@@ -1,10 +1,10 @@
-from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.app import App
+from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.animation import Animation
-from kivy.clock import Clock
 
-class DashboardScreen(Screen):
+class BumilScreen(Screen):
     sidebar_open = False  # Status sidebar, tertutup pada awalnya
     
     def toggle_sidebar(self):

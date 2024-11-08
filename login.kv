@@ -2,45 +2,51 @@
     BoxLayout:
         orientation: 'vertical'
         padding: 20
-        spacing: 30  # Spacing antar elemen
+        spacing: 30
         canvas.before:
             Color:
-                rgba: 0.95, 0.95, 0.95, 1  # Warna latar belakang
+                rgba: 1, 1, 1, 1  # Background color
             Rectangle:
                 pos: self.pos
                 size: self.size
-
-        # Bagian gambar di atas
+        Widget:
+            size_hint_y: None
+            height: 50 
         Image:
-            source: 'assets/profil.png'  # Ganti dengan path gambar yang Anda inginkan
-            size_hint: (None, None)  # Menonaktifkan size_hint untuk kontrol penuh
-            size: (300, 300)  # Ukuran gambar (width, height) dalam piksel
+            source: 'assets/profil.png'
+            size_hint: (None, None)
+            size: (250, 230)
             allow_stretch: True
             keep_ratio: True
-            pos_hint: {'center_x': 0.5}  # Posisikan gambar di tengah secara horizontal
+            pos_hint: {'center_x': 0.5}
 
-           
+        Widget:
+            size_hint_y: None
+            height: 10   
 
-        # Input teks dan tombol
         TextInput:
             id: username
             hint_text: 'Username'
             multiline: False
             size_hint_y: None
-            height: 40  # Atur tinggi TextInput lebih kecil
-            background_color: (0, 0, 0, 0)  # Buat latar belakang transparan
-            foreground_color: (0, 0, 0, 1)  # Warna teks hitam
-            padding_x: 10  # Menambah padding horizontal
-            halign: 'left'  # Rata kiri
-            font_size: 16  # Ukuran font lebih kecil
+            height: 40
+            background_color: (0, 0, 0, 0)
+            foreground_color: (0.2, 0.2, 0.2, 1)
+            padding_x: [100, 0]
+            halign: 'left'
+            font_size: 16
             canvas.before:
                 Color:
-                    rgba: (0, 0, 0, 1)  # Warna hitam untuk garis bawah
+                    rgba: (0, 0, 0, 1)
                 Line:
-                    width: 1.2  # Tebal garis
-                    points: [self.x, self.y, self.right, self.y]  # Garis di bawah TextInput
-            on_focus:
-                self.foreground_color = (0, 0, 1, 1) if self.focus else (0, 0, 0, 1)  # Ganti warna teks saat fokus
+                    width: 1.1
+                    points: [self.x + 80, self.y, self.right - 80, self.y]
+            canvas.after:
+                Color:
+                    rgba: (0, 0.3, 0.8, 1) if self.focus else (0, 0, 0, 0)
+                Line:
+                    width: 1.5
+                    points: [self.x + 80, self.y, self.right - 80, self.y]
 
         BoxLayout:
             orientation: 'vertical'
@@ -50,56 +56,58 @@
                 id: password
                 hint_text: 'Password'
                 multiline: False
-                password: not show_password.active  # Toggle password visibility
+                password: not show_password.active
                 size_hint_y: None
-                height: 40  # Atur tinggi TextInput lebih kecil
-                background_color: (0, 0, 0, 0)  # Buat latar belakang transparan
-                foreground_color: (0, 0, 0, 1)  # Warna teks hitam
-                padding_x: 10  # Menambah padding horizontal
-                halign: 'left'  # Rata kiri
-                font_size: 16  # Ukuran font lebih kecil
+                height: 40
+                background_color: (0, 0, 0, 0)
+                foreground_color: (0.2, 0.2, 0.2, 1)
+                padding_x: [100, 0]
+                halign: 'left'
+                font_size: 16
                 canvas.before:
                     Color:
-                        rgba: (0, 0, 0, 1)  # Warna hitam untuk garis bawah
+                        rgba: (0, 0, 0, 1)
                     Line:
-                        width: 1.2  # Tebal garis
-                        points: [self.x, self.y, self.right, self.y]  # Garis di bawah TextInput
-                # Menghilangkan perubahan warna saat fokus
-                on_focus:
-                    self.foreground_color = (0, 0, 0, 1)  # Tetap warna hitam saat fokus
+                        width: 1.1
+                        points: [self.x + 80, self.y, self.right - 80, self.y]
+                canvas.after:
+                    Color:
+                        rgba: (0, 0.3, 0.8, 1) if self.focus else (0, 0, 0, 0)
+                    Line:
+                        width: 1.5
+                        points: [self.x + 80, self.y, self.right - 80, self.y]
 
-            # Opsi Show Password
             BoxLayout:
-                size_hint: (0.5, None)  # Membuat BoxLayout memanfaatkan seluruh lebar dan menetapkan tinggi tetap
+                size_hint: (0.5, None)
                 height: 40
-                padding: [0, 0]
+                padding: [100, 0]
                 spacing: 10
+                
                 
                 CheckBox:
                     id: show_password
                     size_hint_x: None
                     width: 40
+                    
+                    background_color: (0.1, 0.1, 0.1, 1)  # Change to a non-white color for visibility
                 
                 Label:
-                    text: "Show Password"
-                    color: (0, 0, 0, 1)  # Warna teks hitam dengan alpha 1 (solid)
+                    text: "Lihat Password"
+                    color: (0, 0, 0, 1)
                     size_hint_x: None
                     font_size: 14
-
 
         Button:
             text: "Login"
             size_hint_y: None
-            size_hint_x: 0.5  # Perpendek lebar tombol
-            height: 45  # Atur tinggi tombol
-            pos_hint: {'center_x': 0.5}  # Posisikan tombol di tengah secara horizontal
-            background_color: (0, 0.5, 1, 0.9)  # Warna latar belakang tombol biru dengan transparansi
-            color: (1, 1, 1, 1)  # Warna teks putih
-            font_size: 16  # Ukuran font tombol
-            on_release: app.root.current = 'dashboard_screen'
-            on_press: self.background_color = (0, 0.3, 0.8, 1)  # Warna saat ditekan
+            size_hint_x: 0.5
+            height: 45
+            pos_hint: {'center_x': 0.5}
+            background_color: (0, 0.5, 1, 0.9)
+            color: (1, 1, 1, 1)
+            font_size: 16
+            on_release: root.login()  # Panggil metode login di LoginScreen
 
-        # Tambahkan Widget kosong untuk mendorong input ke atas
         Widget:
             size_hint_y: None
-            height: 300  # Sesuaikan tinggi widget kosong untuk memberi ruang di bawah
+            height: 280

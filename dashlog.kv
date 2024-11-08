@@ -1,0 +1,142 @@
+<DashlogScreen>:
+    FloatLayout:
+        # Konten utama
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 1
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: '50dp'
+                padding: [15, 15, 15, 15]
+
+                Button:
+                    background_normal: 'assets/hamb.png'
+                    size_hint: None, None
+                    size: '70', '70'
+                    pos_hint: {'center_y': 0.5}
+                    on_press: root.toggle_sidebar()
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 0.3
+                padding: [20, 10, 20, 10]
+                spacing: 30
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: 0.4, 1
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0.75, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20, 20, 20, 20]
+
+                    Image:
+                        source: 'assets/3.png'
+                        size_hint_y: 0.3
+                        allow_stretch: True
+                        keep_ratio: False
+                        radius: [20, 20, 0, 0]
+
+                    Label:
+                        text: "Jumlah Balita"
+                        size_hint_y: 0.10
+                        font_size: '14sp'
+                        bold: True
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: 0.4, 1
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0.75, 1, 1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20, 20, 20, 20]
+
+                    Image:
+                        source: 'assets/8.png'
+                        size_hint_y: 0.3
+                        allow_stretch: True
+                        radius: [20, 20, 0, 0]
+                        keep_ratio: False
+
+                    Label:
+                        text: "Jumlah Ibu Hamil"
+                        size_hint_y: 0.10
+                        font_size: '14sp'
+                        bold: True
+
+            BoxLayout:
+                size_hint_y: 0.6
+                padding: [20, 10, 20, 10]
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                Image:
+                    source: 'assets/date.png'
+                    allow_stretch: True
+                    keep_ratio: False
+
+        # Popup Box untuk animasi
+        BoxLayout:
+            id: popup_box
+            orientation: 'vertical'
+            size_hint: 0.8, None
+            height: '60dp'
+            pos_hint: {'top': 1.0, 'center_x': 0.5}
+            opacity: 0  # Mulai dengan opacity 0
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20, 20, 20, 20]
+
+            Label:
+                text: "Login Berhasil"
+                color: 1, 1, 1, 1
+                bold: True
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+
+        # Sidebar
+        BoxLayout:
+            id: sidebar
+            orientation: 'vertical'
+            size_hint: None, 1
+            width: 250
+            pos_hint: {'top': 1}
+            x: -self.width
+            canvas.before:
+                Color:
+                    rgba: 0, 0.75, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            # Sidebar buttons here...
+
+
+    
+
+
+            Widget:
+                size_hint_y: None
+                height: 450

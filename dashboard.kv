@@ -24,7 +24,7 @@
                     size_hint: None, None
                     size: '70', '70'
                     pos_hint: {'center_y': 0.5}
-                    on_release: app.root.current = 'menu_screen'
+                    on_release: root.toggle_sidebar()  # Panggil fungsi untuk animasi sidebar
 
             # Bagian untuk dashboard
             BoxLayout:
@@ -39,7 +39,7 @@
                     size_hint: 0.4, 1  # Ukuran kotak lebih kecil
                     canvas.before:
                         Color:
-                            rgba: 0, 0.3, 0.8, 1
+                            rgba: 0, 0.75, 1, 1
                         RoundedRectangle:
                             pos: self.pos
                             size: self.size
@@ -55,7 +55,9 @@
                     Label:
                         text: "Jumlah Balita"
                         size_hint_y: 0.10  # Ukuran label lebih kecil
+                        color:0 , 0, 0, 1
                         font_size: '14sp'  # Ukuran font lebih kecil
+                        bold: True
 
                 # Kotak kedua untuk jumlah ibu hamil
                 BoxLayout:
@@ -63,7 +65,7 @@
                     size_hint: 0.4, 1  # Ukuran kotak lebih kecil
                     canvas.before:
                         Color:
-                            rgba: 0, 0.3, 0.8, 1
+                            rgba: 0, 0.75, 1, 1
                         RoundedRectangle:
                             pos: self.pos
                             size: self.size
@@ -79,12 +81,14 @@
                     Label:
                         text: "Jumlah Ibu Hamil"
                         size_hint_y: 0.10  # Ukuran label lebih kecil
+                        color:0 , 0, 0, 1
                         font_size: '14sp'  # Ukuran font lebih kecil
+                        bold: True
 
             # Bagian bawah untuk kalender
             BoxLayout:
                 size_hint_y: 0.6
-                padding: [20, 10, 20, 10]
+                padding: [25, 25, 25, 25]
                 canvas.before:
                     Color:
                         rgba: 1, 1, 1, 1
@@ -94,28 +98,117 @@
                 Image:
                     source: 'assets/date.png'
                     allow_stretch: True
+                    padding: 10, 10, 10, 10
                     keep_ratio: False
 
-        # Popup mengambang di bagian atas layar
+        # Sidebar menu dengan animasi
         BoxLayout:
-            id: popup_box
+            id: sidebar
             orientation: 'vertical'
-            size_hint: 0.8, None
-            height: '60dp'
-            pos_hint: {'top': 1.0, 'center_x': 0.5}
-            opacity: 0
+            size_hint: None, 1
+            width: 250
+            pos_hint: {'top': 1}
+            x: -self.width  # Sidebar disembunyikan di luar layar pada posisi awal
             canvas.before:
                 Color:
-                    rgba: 0, 0, 1, 1
-                RoundedRectangle:
+                    rgba: 0, 0.75, 1, 1  # Warna sidebar
+                Rectangle:
                     pos: self.pos
                     size: self.size
-                    radius: [20, 20, 20, 20]
 
-            Label:
-                text: "Login Berhasil"
-                color: 1, 1, 1, 1
-                bold: True
-                halign: 'center'
-                valign: 'middle'
-                text_size: self.size
+            # Konten sidebar
+            Button:
+                text: "Dashboard"
+                bold:True
+                color: 1, 1, 1, 1  # Warna teks putih
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0  # Latar belakang transparan
+                background_normal: ''  # Menghilangkan gambar default pada tombol
+                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
+                halign: 'left'  # Meratakan teks ke kiri
+                valign: 'middle'  # Meratakan teks ke tengah vertikal
+                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                on_release: 
+                    app.root.current = 'dashboard_screen'
+                    root.hide_sidebar()
+            Button:
+                text: "Balita"
+                bold:True
+                color: 1, 1, 1, 1  # Warna teks putih
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0  # Latar belakang transparan
+                background_normal: ''  # Menghilangkan gambar default pada tombol
+                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
+                halign: 'left'  # Meratakan teks ke kiri
+                valign: 'middle'  # Meratakan teks ke tengah vertikal
+                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                on_release: 
+                    app.root.current = 'balita_screen'
+                    root.hide_sidebar()
+            Button:
+                text: "Perkembangan Balita"
+                bold:True
+                color: 1, 1, 1, 1  # Warna teks putih
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0  # Latar belakang transparan
+                background_normal: ''  # Menghilangkan gambar default pada tombol
+                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
+                halign: 'left'  # Meratakan teks ke kiri
+                valign: 'middle'  # Meratakan teks ke tengah vertikal
+                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                on_release: 
+                    app.root.current = 'balita_screen'  
+                    root.hide_sidebar()      
+            Button:
+                text: "Ibu Hamil"
+                bold:True
+                color: 1, 1, 1, 1  # Warna teks putih
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0  # Latar belakang transparan
+                background_normal: ''  # Menghilangkan gambar default pada tombol
+                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
+                halign: 'left'  # Meratakan teks ke kiri
+                valign: 'middle'  # Meratakan teks ke tengah vertikal
+                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                on_release:
+                    app.root.current = 'bumil_screen'  
+                    root.hide_sidebar()
+            Button:
+                text: "Laporan "
+                bold:True
+                color: 1, 1, 1, 1  # Warna teks putih
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0  # Latar belakang transparan
+                background_normal: ''  # Menghilangkan gambar default pada tombol
+                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
+                halign: 'left'  # Meratakan teks ke kiri
+                valign: 'middle'  # Meratakan teks ke tengah vertikal
+                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                on_release: 
+                    app.root.current = 'laporan_screen'   
+                    root.hide_sidebar()      
+            Button:
+                text: "Profil"
+                bold:True
+                color: 1, 1, 1, 1  # Warna teks putih
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0  # Latar belakang transparan
+                background_normal: ''  # Menghilangkan gambar default pada tombol
+                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
+                halign: 'left'  # Meratakan teks ke kiri
+                valign: 'middle'  # Meratakan teks ke tengah vertikal
+                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                on_release:
+                    app.root.current = 'profil_screen' 
+                    root.hide_sidebar()
+            Widget:
+                size_hint_y: None
+                height: 450
+                
+           

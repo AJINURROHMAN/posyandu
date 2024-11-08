@@ -1,37 +1,49 @@
+from kivy.uix.screenmanager import Screen
 from kivy.app import App
-from kivy.uix.screenmanager import Screen, ScreenManager, FadeTransition
-from kivy.lang import Builder
-from kivy.core.window import Window
-
-# Load the KV file for this screen
-Builder.load_file('login.kv')
-Builder.load_file('logout.kv')
-Builder.load_file('profil.kv')
-
-
-class LogoutScreen(Screen):
-    pass
-class ProfilScreen(Screen):
-    pass
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.popup import Popup
+from kivy.uix.anchorlayout import AnchorLayout
 
 class LoginScreen(Screen):
-    
-    def build(self):
-        # Muat file KV
-        Builder.load_file('logout.kv')
-        Builder.load_file('login.kv')
-        Builder.load_file('profil.kv')
-
-        # Buat ScreenManager untuk mengelola layar
-        sm = ScreenManager(transition=FadeTransition())
-        sm.add_widget(LogoutScreen(name='logout_screen'))  # Menambahkan screen ke ScreenManager
-        sm.add_widget(LoginScreen(name='login_screen'))  # Menambahkan screen ke ScreenManager
-        sm.add_widget(ProfilScreen(name='profil_screen'))  # Menambahkan screen ke ScreenManager
-        return sm    
-    
     def login(self):
-        # Logic to navigate to another screen
-        if self.ids.username.text == 'admin' and self.ids.password.text == 'admin':
-            self.manager.current = 'beranda_screen'  # Ganti ke 'beranda_screen'
+        username = self.ids.username.text
+        password = self.ids.password.text
+
+        # Validasi username dan password dengan data dari Firebase
+        if self.validate_credentials(username, password):
+            App.get_running_app().user = username  # Simpan username di MainApp
+            self.manager.current = 'dashboard_screen'  # Alihkan ke dashboard
         else:
-            print("Invalid credentials")
+            self.show_popup("Login gagal! Periksa username dan password.")
+
+    def validate_credentials(self, username, password):
+        # Ambil data login dari Firebase
+        database = App.get_running_app().database
+        user_data = database.db.child("login").get()
+
+        if user_data is not None and user_data.each():
+            for data in user_data.each():
+                info = data.val()
+                # Cek apakah username dan password sesuai dengan data di database
+                if info.get("username") == username and info.get("password") == password:
+                    return True  # Login berhasil
+        return False  # Login gagal
+
+    def show_popup(self, message):
+        # Buat tampilan popup dengan desain yang lebih rapi
+        popup_layout = BoxLayout(orientation='vertical', padding=20, spacing=10)
+        message_label = Label(text=message, halign='center', valign='middle', text_size=(300, None), color=(0, 0, 0, 1))
+        close_button = Button(text="Tutup", size_hint=(0.4, None), height=40, pos_hint={'center_x': 0.5}, background_color=(0.7, 0, 0, 1), color=(1, 1, 1, 1))
+
+        # Atur tata letak dan tambahan widget
+        popup_layout.add_widget(message_label)
+        popup_layout.add_widget(close_button)
+
+        # Membuat popup
+        popup = Popup(title="Pesan Login", content=popup_layout, size_hint=(None, None), size=(350, 200), auto_dismiss=False)
+        close_button.bind(on_release=popup.dismiss)
+        
+        # Tampilkan popup
+        popup.open()

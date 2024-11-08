@@ -2,42 +2,30 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.lang import Builder
 from kivy.core.window import Window
-
-
-
-# Load the KV file for this screen
-Builder.load_file('profil.kv')
-Builder.load_file('logout.kv')
-Builder.load_file('login.kv')
-
+from kivy.animation import Animation
 
 class ProfilScreen(Screen):
-    def go_to_logout(self):
-        self.manager.current = 'logout_screen'  # Ganti ke screen beranda
+    sidebar_visible = False  # Untuk melacak status tampilan sidebar
 
-class BerandaScreen(Screen):
-    pass
+    def toggle_sidebar(self):
+        # Jika sidebar sedang terlihat, sembunyikan; jika tersembunyi, tampilkan
+        if self.sidebar_visible:
+            self.hide_sidebar()
+        else:
+            self.show_sidebar()
 
-class LogoutScreen(Screen):
-    pass
-class LoginScreen(Screen):
-    pass
+    def show_sidebar(self):
+        # Menggunakan animasi untuk menampilkan sidebar
+        anim = Animation(x=0, duration=0.3)  # Memindahkan sidebar ke posisi terlihat
+        anim.start(self.ids.sidebar)
+        self.sidebar_visible = True
 
-class TestApp(App):
-    def build(self):
-        sm = ScreenManager()
+    def hide_sidebar(self):
+        # Menggunakan animasi untuk menyembunyikan sidebar
+        anim = Animation(x=-self.ids.sidebar.width, duration=0.3)  # Memindahkan sidebar keluar layar
+        anim.start(self.ids.sidebar)
+        self.sidebar_visible = False
 
-        # Tambahkan screen ke dalam ScreenManager
-        sm.add_widget(ProfilScreen(name='profil_screen'))
-        sm.add_widget(BerandaScreen(name='beranda_screen'))
-        sm.add_widget(LogoutScreen(name='logout_screen'))  # Menambahkan screen ke ScreenManager
-        sm.add_widget(LoginScreen(name='login_screen'))  # Menambahkan screen ke ScreenManager
-
-        # Set screen default
-        sm.current = 'profil_screen'
-        
-        return sm
-
-if __name__ == '__main__':
-    Window.size = (360, 640)
-    TestApp().run()
+    def on_enter(self):
+        # Setiap kali masuk ke layar ini, pastikan sidebar dalam keadaan tersembunyi
+        self.hide_sidebar()
