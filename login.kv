@@ -9,9 +9,34 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-        Widget:
-            size_hint_y: None
-            height: 50 
+        # Widget:
+        #     size_hint_y: None
+        #     height: 50 
+        FloatLayout:
+            BoxLayout:
+                id: popup_box
+                orientation: 'vertical'
+                size_hint: 0.8, None
+                height: '60dp'
+                pos_hint: {'top': 1.0, 'center_x': 0.5}
+                opacity: 0  # Mulai dengan opacity 0
+                canvas.before:
+                    Color:
+                        rgba: 0, 0, 1, 1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [20, 20, 20, 20]
+
+                Label:
+                    text: "Login Berhasil"
+                    color: 1, 1, 1, 1
+                    bold: True
+                    halign: 'center'
+                    valign: 'middle'
+                    text_size: self.size
+
+    
         Image:
             source: 'assets/profil.png'
             size_hint: (None, None)
@@ -20,9 +45,9 @@
             keep_ratio: True
             pos_hint: {'center_x': 0.5}
 
-        Widget:
-            size_hint_y: None
-            height: 10   
+        # Widget:
+        #     size_hint_y: None
+        #     height: 10   
 
         TextInput:
             id: username
