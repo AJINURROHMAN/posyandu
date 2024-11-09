@@ -26,9 +26,10 @@ class LoginScreen(Screen):
             # Menjadwalkan penghilangan popup setelah 2 detik
             Clock.schedule_once(self.hide_popup, 2)
             
-            self.manager.current = 'dashboard_screen'  # Alihkan ke dashboard
+            self.manager.current = 'dashlog_screen'  # Alihkan ke dashboard
         else:
             self.show_popup("Login gagal! Periksa username dan password.")
+            print('Login gagal! Periksa username dan password.')
     def hide_popup(self, dt):
             # Animasi fade-out selama 1 detik
             anim_disappear = Animation(opacity=0, duration=1.0)

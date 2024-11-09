@@ -5,12 +5,14 @@ from kivy.clock import Clock
 class DashlogScreen(Screen):
     sidebar_visible = False  # Status sidebar
     sidebar_open = False  # Status sidebar
+    popup_shown = False
 
     def on_enter(self):
-        # Pastikan popup muncul setelah layar dimasukkan
-        print( 'show pop up on_enter')
-        
-        Clock.schedule_once(self.show_popup, 0)  # Delay sedikit agar popup dapat ditampilkan setelah layar muncul
+        # Cek apakah popup sudah pernah ditampilkan
+        if not self.popup_shown:
+            print('show pop up on_enter')
+            Clock.schedule_once(self.show_popup, 0)
+            self.popup_shown = True  # Delay sedikit agar popup dapat ditampilkan setelah layar muncul
 
     def show_popup(self, dt):
         # Mengatur opacity popup ke 0 (tersembunyi)
