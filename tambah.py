@@ -16,7 +16,7 @@ class TambahScreen(Screen):
         ibu = self.ids.ibu.text
         umur = self.ids.umur.text
         telepon = self.ids.telepon.text
-
+       
         # Validasi input
         if not nama or not ibu or not umur or not telepon:
             self.show_popup("Semua field harus diisi!")
@@ -35,6 +35,7 @@ class TambahScreen(Screen):
             self.ids.ibu.text = ''
             self.ids.umur.text = ''
             self.ids.telepon.text = ''
+          
             
             # Alihkan ke halaman BalitaScreen
             self.manager.current = 'balita_screen'

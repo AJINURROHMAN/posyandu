@@ -6,7 +6,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.popup import Popup
 from kivy.animation import Animation
 from kivy.uix.behaviors import ButtonBehavior
-from kivy.graphics import Color, Rectangle
+from kivy.graphics import RoundedRectangle
 from kivy.uix.button import Button
 from kivy.utils import get_color_from_hex
 
@@ -34,10 +34,15 @@ class BalitaScreen(Screen):
 
         # Warna bergantian untuk setiap data balita
         colors = [
-            get_color_from_hex("#AEDFF7"),  # Biru muda
-            get_color_from_hex("#F7DFAE"),  # Kuning muda
-            get_color_from_hex("#F4B6C2"),  # Merah muda
-            get_color_from_hex("#D4E157")   # Hijau muda
+            # get_color_from_hex("#AEDFF7"),  # Biru muda
+            # get_color_from_hex("#F7DFAE"),  # Kuning muda
+            # get_color_from_hex("#F4B6C2"),  # Merah muda
+            # get_color_from_hex("#D4E157")   # Hijau muda
+            get_color_from_hex("#82B1FF"),  # Biru Muda Terang
+            get_color_from_hex("#FFD180") , # Peach Terang
+            get_color_from_hex("#FF9E80") , # Merah Muda Salmon
+            get_color_from_hex("#B9F6CA"),  # Hijau Mint Cerah
+            get_color_from_hex("#FFEB3B")  # Kuning Cerah
         ]
 
         if data_balita is not None and data_balita.each() is not None:
@@ -50,13 +55,14 @@ class BalitaScreen(Screen):
 
                     # Tombol di dalam BoxLayout dengan warna latar berbeda
                     button = Button(
-                        text=f"Nama: {info['nama']}\nUmur: {info['umur']}",
+                        text=f"[b]Nama:[/b]\n {info['nama']}\n[b]Umur:[/b] {info['umur']}",
                         size_hint_y=None,
                         height=150,
                         font_size=25,
                         color=(1, 1, 1, 1),  # Warna teks putih
                         background_normal='',  # Menghilangkan background image default
-                        background_color=colors[index % len(colors)]  # Warna bergantian
+                        background_color=colors[index % len(colors)],  # Warna bergantian
+                        markup= True
                         
                     )
                     button.bind(on_release=self.show_details)  # Bind ke fungsi show_details untuk event klik
