@@ -1,223 +1,117 @@
 <ProfilScreen>:
-    FloatLayout:  # Menggunakan FloatLayout untuk memungkinkan posisi absolut
-        BoxLayout:
-            orientation: 'vertical'
-            canvas:
-                Color:
-                    rgba: 1, 1, 1, 1  # Warna putih
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+    FloatLayout:
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1  # Latar belakang putih
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Bagian Profil
         FloatLayout:
             Image:
-                padding: [30, 30, 30, 30]
-                source: 'assets/foto.png'  # Ganti dengan path gambar Anda
+                source: 'assets/foto.png'  # Path gambar
                 size_hint: None, None
-                size: '90dp', '90dp'  # Ukuran gambar
-                pos_hint: {'center_x': 0.5, 'y': 0.8}  # Mengatur posisi lebih ke bawah pada window 360x640
+                size: '90dp', '90dp'
+                pos_hint: {'center_x': 0.5, 'y': 0.75}
 
             BoxLayout:
                 orientation: 'vertical'
-                padding: 20
+                padding: [20, 10]
                 spacing: 20
+                pos_hint: {'center_x': 0.5, 'y': 0.4}
 
-                # BoxLayout untuk Nama
+                # BoxLayout untuk Username
                 BoxLayout:
+                    orientation: 'horizontal'
                     size_hint_y: None
                     height: '40dp'
                     padding: [5, 5]
                     canvas.before:
                         Color:
-                            rgba: 0, 0, 0, 1  # Warna garis bawah hitam
+                            rgba: 0, 0, 0, 1  # Garis bawah hitam
                         Line:
-                            points: [self.x, self.y, self.right, self.y]  # Garis di bawah
-                            width: 1.0  # Ketebalan garis
+                            points: [self.x, self.y, self.right, self.y]
+                            width: 1.0
 
                     Label:
-                        text: 'Nama: Fernando dika'  # Ganti dengan nama yang sesuai
+                        id: username_label
+                        text: '[b]Username:[/b]'  # Teks bold menggunakan markup
+                        markup: True
                         color: (0, 0, 0, 1)
-                        size_hint_x: None
-                        width: self.parent.width
-                        halign: 'left'
-                        valign: 'middle'
-                        text_size: self.size  # Ukuran teks mengikuti ukuran widget
-                        padding_x: 10  # Jarak padding dari sisi kiri
-
-                # BoxLayout untuk Email
-                BoxLayout:
-                    size_hint_y: None
-                    height: '40dp'
-                    padding: [5, 5]
-                    canvas.before:
-                        Color:
-                            rgba: 0, 0, 0, 1  # Warna garis bawah hitam
-                        Line:
-                            points: [self.x, self.y, self.right, self.y]  # Garis di bawah
-                            width: 1.0  # Ketebalan garis
-
-                    Label:
-                        text: 'Email: fernannd@gmail.com'  # Ganti dengan email yang sesuai
-                        color: (0, 0, 0, 1)
-                        size_hint_x: None
-                        width: self.parent.width
+                        size_hint_x: 0.4
                         halign: 'left'
                         valign: 'middle'
                         text_size: self.size
-                        padding_x: 10  # Jarak padding dari sisi kiri
 
-                # BoxLayout untuk Nomor Telepon
+                # BoxLayout untuk Password
                 BoxLayout:
+                    orientation: 'horizontal'
                     size_hint_y: None
                     height: '40dp'
                     padding: [5, 5]
                     canvas.before:
                         Color:
-                            rgba: 0, 0, 0, 1  # Warna garis bawah hitam
+                            rgba: 0, 0, 0, 1
                         Line:
-                            points: [self.x, self.y, self.right, self.y]  # Garis di bawah
-                            width: 1.0  # Ketebalan garis
+                            points: [self.x, self.y, self.right, self.y]
+                            width: 1.0
 
                     Label:
-                        text: 'Nomor Telepon: 08123456789'  # Ganti dengan nomor telepon yang sesuai
+                        id: password_label
+                        text: '[b]Password:[/b]'
+                        markup: True
                         color: (0, 0, 0, 1)
-                        size_hint_x: None
-                        width: self.parent.width
+                        size_hint_x: 0.4
                         halign: 'left'
                         valign: 'middle'
                         text_size: self.size
-                        padding_x: 10  # Jarak padding dari sisi kiri
 
                 Button:
                     text: 'Log Out'
                     size_hint_x: 0.5
-                    background_color: (0, 0.5, 1, 0.9) 
+                    background_color: (0, 0.5, 1, 0.9)
                     size_hint_y: None
                     pos_hint: {'center_x': 0.5}
-                    height: '40dp'  # Menggunakan 'dp' untuk ukuran
-                    on_press: app.root.current = 'logout_screen'  # Ganti dengan metode yang sesuai
+                    height: '40dp'
+                    on_release: 'login_screen'
 
-                Widget:
-                    size_hint_y: None
-                    height: 350 # Pastikan Widget ini berada di bawah Button
+        # Sidebar
         BoxLayout:
             id: sidebar
             orientation: 'vertical'
             size_hint: None, 1
             width: 250
             pos_hint: {'top': 1}
-            x: -self.width  # Sidebar disembunyikan di luar layar pada posisi awal
+            x: -self.width
             canvas.before:
                 Color:
-                    rgba: 0, 0.75, 1, 1  # Warna sidebar
+                    rgba: 0, 0.75, 1, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
-            # Konten sidebar
+            # Tombol Sidebar
             Button:
                 text: "Dashboard"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
+                bold: True
+                color: 1, 1, 1, 1
                 size_hint_y: None
                 height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
-                on_release: 
-                    app.root.current = 'dashboard_screen'
-                    root.hide_sidebar()
-            Button:
-                text: "Balita"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
-                size_hint_y: None
-                height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
-                on_release: 
-                    app.root.current = 'balita_screen'
-                    root.hide_sidebar()
-            Button:
-                text: "Perkembangan Balita"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
-                size_hint_y: None
-                height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
-                on_release: 
-                    app.root.current = 'balita_screen'  
-                    root.hide_sidebar()      
-            Button:
-                text: "Ibu Hamil"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
-                size_hint_y: None
-                height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
                 on_release:
-                    app.root.current = 'bumil_screen'  
+                    app.root.current = 'dashlog_screen'
                     root.hide_sidebar()
-            Button:
-                text: "Laporan "
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
-                size_hint_y: None
-                height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
-                on_release: 
-                    app.root.current = 'laporan_screen'   
-                    root.hide_sidebar()      
-            Button:
-                text: "Profil"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
-                size_hint_y: None
-                height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
-                on_release:
-                    app.root.current = 'profil_screen' 
-                    root.hide_sidebar()
-            Widget:
-                size_hint_y: None
-                height: 450       
-        # Tambahkan gambar ikon di pojok kanan atas
+
+            # Tambahan tombol lainnya disini
+            # Tombol lain dapat ditambahkan dengan format yang sama
+
         Button:
-            background_normal: 'assets/edit.png'  # Ganti dengan path gambar ikon Anda
-            size_hint: None, None
-            size: 65, 50
-            pos: 20, root.height - 70
-            allow_stretch: True
-            keep_ratio: True
-            pos_hint: {'right': 1, 'top': 1}
-        Button:
-            background_normal: 'assets/hamb.png'  # Gambar ikon hamburger
+            background_normal: 'assets/hamb.png'
             size_hint: None, None
             size: 70, 70
             pos: 20, root.height - 70

@@ -1,4 +1,4 @@
-<TambahBumilScreen>:
+<AddDataScreen>:
     canvas.before:
         Color:
             rgb: 0.95, 0.95, 0.95  # Latar belakang putih terang
@@ -14,7 +14,7 @@
             size: 35, 35
             pos: 20, root.height - 70
             allow_stretch: True
-            on_release: app.root.current = 'bumil_Screen'
+            on_release: app.root.current = 'adddata_Screen'
 
         BoxLayout:
             orientation: 'vertical'
@@ -46,24 +46,32 @@
                 height: 40
 
             CustomTextInput:
-                id: suami
-                hint_text: 'Suami'
+                id: berat
+                hint_text: 'Berat'
                 multiline: False
                 size_hint_x: 1  # Mengisi lebar penuh BoxLayout
                 size_hint_y: None
                 height: 40
 
             CustomTextInput:
-                id: alamat
-                hint_text: 'Alamat'
+                id: lingkark
+                hint_text: 'Lingkar Kepala'
                 multiline: False
                 size_hint_x: 1  # Mengisi lebar penuh BoxLayout
                 size_hint_y: None
                 height: 40
 
             CustomTextInput:
-                id: telepon
-                hint_text: 'Telepon'
+                id: tinggi
+                hint_text: 'Tinggi badan'
+                multiline: False
+                size_hint_x: 1  # Mengisi lebar penuh BoxLayout
+                size_hint_y: None
+                height: 40
+
+            CustomTextInput:
+                id: lingkarl
+                hint_text: 'Lingkar Lengan'
                 multiline: False
                 size_hint_x: 1  # Mengisi lebar penuh BoxLayout
                 size_hint_y: None
@@ -81,7 +89,7 @@
                     text: 'Simpan'
                     size_hint_x: None
                     width: 100
-                    on_release: root.simpan_data_bumil()  # Memanggil metode simpan_data dari TambahScreen
+                    on_release: root.simpan_data_perkembangan()  # Memanggil metode simpan_data dari TambahScreen
                     background_color: (0, 0, 0, 0)
                     color: 1, 1, 1, 1
                     canvas.before:
@@ -96,7 +104,7 @@
                     text: 'Batal'
                     size_hint_x: None
                     width: 100
-                    on_release: app.root.current = 'bumil_screen'
+                    on_release: app.root.current = 'updatebalita_screen'
                     background_color: (0, 0, 0, 0)
                     color: 1, 1, 1, 1
                     canvas.before:

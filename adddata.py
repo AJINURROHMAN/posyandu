@@ -7,23 +7,23 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 
-
-
 # Memuat file .kv untuk tampilan
-Builder.load_file('tambah_bumil.kv')
+Builder.load_file('adddata.kv')
 
 class CustomTextInput(TextInput):
     pass
-class TambahBumilScreen(Screen):
-    def simpan_data_bumil(self):
+
+class AddDataScreen(Screen):
+    def simpan_data_perkembangan(self):
         # Ambil data dari field input
         nama = self.ids.nama.text
-        suami = self.ids.suami.text
-        alamat = self.ids.alamat.text
-        telepon = self.ids.telepon.text
-       
+        berat = self.ids.berat.text
+        lingkark = self.ids.lingkark.text  # Sesuaikan dengan ID yang ada di adddata.kv
+        tinggi = self.ids.tinggi.text
+        lingkarl = self.ids.lingkarl.text  # Sesuaikan dengan ID yang ada di adddata.kv
+        
         # Validasi input
-        if not nama or not suami or not alamat or not telepon:
+        if not nama or not berat or not lingkark or not tinggi or not lingkarl:
             self.show_popup("Semua field harus diisi!")
             return
 
@@ -32,20 +32,21 @@ class TambahBumilScreen(Screen):
             username = App.get_running_app().user
 
             # Simpan data ke Firebase
-            App.get_running_app().database.simpan_data_bumil(username, nama, suami, alamat, telepon)
+            App.get_running_app().database.simpan_data_perkembangan(username, nama, berat, tinggi, lingkark, lingkarl)
             self.show_popup("Data berhasil disimpan!")
 
             # Kosongkan field setelah simpan
             self.ids.nama.text = ''
-            self.ids.suami.text = ''
-            self.ids.alamat.text = ''
-            self.ids.telepon.text = ''
-          
+            self.ids.berat.text = ''
+            self.ids.tinggi.text = ''
+            self.ids.lingkark.text = ''
+            self.ids.lingkarl.text = ''
             
-            # Alihkan ke halaman BumilScreen
-            self.manager.current = 'bumil_screen'
+            # Alihkan ke halaman updatebalita_screen
+            self.manager.current = 'updatebalita_screen'
         except Exception as e:
             self.show_popup(f"Error saat menyimpan data: {e}")
+
 
     def show_popup(self, message):
         popup_content = BoxLayout(orientation='vertical', padding=10)

@@ -100,6 +100,7 @@
                         size_hint: None, None
                         width: 300  # Sesuaikan dengan ukuran yang diinginkan
                         height: 200  # Sesuaikan dengan ukuran yang diinginkan
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5} 
 
                     Image:
                         source: 'assets/profil.png'
@@ -108,6 +109,7 @@
                         size_hint: None, None
                         width: 300  # Sesuaikan dengan ukuran yang diinginkan
                         height: 200  # Sesuaikan dengan ukuran yang diinginkan
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5} 
 
                     Image:
                         source: 'assets/background.png'
@@ -116,8 +118,12 @@
                         size_hint: None, None
                         width: 300  # Sesuaikan dengan ukuran yang diinginkan
                         height: 200  # Sesuaikan dengan ukuran yang diinginkan
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5} 
 
                     # Anda bisa menambahkan lebih banyak gambar sesuai kebutuhan
+            Widget:
+                size_hint_y: None
+                height: 150
 
         # Popup Box untuk animasi
         BoxLayout:
@@ -153,7 +159,7 @@
             x: -self.width
             canvas.before:
                 Color:
-                    rgba: 0, 0.75, 1, 1
+                    rgba: 0, 0.5, 1, 0.9
                 Rectangle:
                     pos: self.pos
                     size: self.size
@@ -204,7 +210,7 @@
                 valign: 'middle'
                 padding_x: 10
                 on_release: 
-                    app.root.current = 'balita_screen'  
+                    app.root.current = 'updatebalita_screen'  
                     root.hide_sidebar()
 
             Button:

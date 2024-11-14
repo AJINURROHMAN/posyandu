@@ -6,9 +6,8 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-
         Label:
-            text: "Data Bumil"
+            text: "Data Ibu Hamil"
             font_size: 28
             bold: True
             color: 0, 0, 0, 1  # Warna teks hitam
@@ -23,199 +22,47 @@
             pos: 20, root.height - 70
             allow_stretch: True
             keep_ratio: True
-            on_press: app.root.current = root.toggle_sidebar()
-        
+            on_press: root.toggle_sidebar()
+
+        BoxLayout:
+            size_hint_y: None
+            size_hint_x: 0.9
+            height: 50
+            padding: 10
+            pos_hint: {"center_x": 0.5, "top": 0.9}
+            
+            # Input untuk pencarian
+            TextInput:
+                id: search_input
+                hint_text: "Cari nama balita..."
+                size_hint_x: 0.9
+                size_hint_y: 1.5
+                multiline: False  # Mencegah teks goyang
+                background_color: [ 0, 0, 0, 0]  # Warna latar belakang putih
+                foreground_color: [0, 0, 0, 1]  # Warna teks hitam
+
+            # Tombol pencarian
+            Button:
+                text: "Cari"
+                size_hint_x: 0.2
+                size_hint_y: 1.5
+                on_release: root.search_data(search_input.text)
+                background_color: [0, 0.5, 1, 1]  # Warna latar belakang biru
+                color: [1, 1, 1, 1]  # Warna teks putih
         # ScrollView untuk menampung GridLayout (supaya bisa scroll)
         ScrollView:
-            size_hint: (1, 0.8)  # Mengatur tinggi ScrollView
-            pos_hint: {"center_x": 0.5, "top": 0.9}
+            size_hint: (1, 0.7)  # Mengatur tinggi ScrollView
+            pos_hint: {"center_x": 0.5, "top": 0.85}
 
             # GridLayout vertikal untuk data balita
             GridLayout:
-                id: data_grid
+                id: data_container
+                background_color: 0, 0, 0, 1
                 cols: 1  # Mengatur grid menjadi satu kolom (vertikal)
                 padding: 30  # Memberikan padding di sekeliling grid
-                spacing: 35  # Memberikan jarak antar elemen dalam grid (antar BoxLayout)
+                spacing: 10  # Memberikan jarak antar elemen dalam grid
                 size_hint_y: None  # Supaya ScrollView berfungsi
                 height: self.minimum_height  # Mengatur tinggi GridLayout berdasarkan isinya
-                
-                # Header Grid
-                BoxLayout:
-                    orientation: 'vertical'
-                    color: 0, 0, 0, 1
-                    spacing: 25
-                    padding: 10  # Menambahkan padding untuk memberi ruang di dalam BoxLayout
-                    size_hint: None, None
-                    size: 483, 100  # Mengatur ukuran BoxLayout untuk header
-
-                    canvas.before:
-                        Color:
-                            rgba: 0.9, 0.9, 0.9, 1  # Warna latar abu-abu muda
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
-                    Label:
-                        text: "Ibu Marni"
-                        color: 0, 0, 0, 1
-                        bold: True
-                        font_size: 20  # Mengatur ukuran font
-
-                    Label:
-                        text: "laweyan,Surakarta"
-                        color: 0, 0, 0, 1
-                        font_size: 20  # Mengatur ukuran font
-                BoxLayout:
-                    orientation: 'vertical'
-                    color: 0, 0, 0, 1
-                    spacing: 25
-                    padding: 10  # Menambahkan padding untuk memberi ruang di dalam BoxLayout
-                    size_hint: None, None
-                    size: 483, 100  # Mengatur ukuran BoxLayout untuk header
-
-                    canvas.before:
-                        Color:
-                            rgba: 0.9, 0.9, 0.9, 1  # Warna latar abu-abu muda
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
-                    Label:
-                        text: "Ibu Minten"
-                        color: 0, 0, 0, 1
-                        bold: True
-                        font_size: 20  # Mengatur ukuran font
-
-                    Label:
-                        text: "laweyan,Surakarta"
-                        color: 0, 0, 0, 1
-                        font_size: 20
-
-                BoxLayout:
-                    orientation: 'vertical'
-                    color: 0, 0, 0, 1
-                    spacing: 25
-                    padding: 10  # Menambahkan padding untuk memberi ruang di dalam BoxLayout
-                    size_hint: None, None
-                    size: 483, 100  # Mengatur ukuran BoxLayout untuk header
-
-                    canvas.before:
-                        Color:
-                            rgba: 0.9, 0.9, 0.9, 1  # Warna latar abu-abu muda
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
-                    Label:
-                        text: "Ibu Lasmi"
-                        color: 0, 0, 0, 1
-                        bold: True
-                        font_size: 20  # Mengatur ukuran font
-
-                    Label:
-                        text: "laweyan,Surakarta"
-                        color: 0, 0, 0, 1
-                        font_size: 20
-
-                # Data balita (contoh baris Andi)
-                BoxLayout:
-                    orientation: 'vertical'
-                    spacing: 25
-                    padding: 10  # Menambahkan padding untuk memberi ruang di dalam BoxLayout
-                    size_hint: None, None
-                    size: 483, 100  # Mengatur ukuran BoxLayout untuk data balita
-
-                    canvas.before:
-                        Color:
-                            rgba: 0.7, 0.9, 1, 1  # Warna latar biru muda
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
-                    Label:
-                        text: "Ibu Saminah"
-                        color: 0, 0, 0, 1
-                        bold: True
-                        font_size: 20  # Mengatur ukuran font untuk label balita
-
-                    Label:
-                        text: "laweyan,Surakarta"
-                        color: 0, 0, 0, 1
-                        font_size: 20  # Mengatur ukuran font untuk label balita
-
-                # Data balita (contoh baris Budi)
-                BoxLayout:
-                    orientation: 'vertical'
-                    spacing: 25
-                    padding: 10  # Menambahkan padding untuk memberi ruang di dalam BoxLayout
-                    size_hint: None, None
-                    size: 483, 100  # Mengatur ukuran BoxLayout untuk data balita
-
-                    canvas.before:
-                        Color:
-                            rgba: 0.9, 1, 0.7, 1  # Warna latar hijau muda
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
-                    Label:
-                        text: "Ibu Lasmi"
-                        color: 0, 0, 0, 1
-                        bold: True
-                        font_size: 20  # Mengatur ukuran font untuk label balita
-
-                    Label:
-                        text: "laweyan,Surakarta"
-                        color: 0, 0, 0, 1
-                        font_size: 20  # Mengatur ukuran font untuk label balita
-                BoxLayout:
-                    orientation: 'vertical'
-                    spacing: 25
-                    padding: 10  # Menambahkan padding untuk memberi ruang di dalam BoxLayout
-                    size_hint: None, None
-                    size: 483, 100  # Mengatur ukuran BoxLayout untuk data balita
-
-                    canvas.before:
-                        Color:
-                            rgba: 0.9, 1, 0.7, 1  # Warna latar hijau muda
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
-                    Label:
-                        text: "Ibu Siti"
-                        color: 0, 0, 0, 1
-                        bold: True
-                        font_size: 20  # Mengatur ukuran font untuk label balita
-
-                    Label:
-                        text: "laweyan,Surakarta"
-                        color: 0, 0, 0, 1
-                        font_size: 20
-                BoxLayout:
-                    orientation: 'vertical'
-                    spacing: 25
-                    padding: 10  # Menambahkan padding untuk memberi ruang di dalam BoxLayout
-                    size_hint: None, None
-                    size: 483, 100  # Mengatur ukuran BoxLayout untuk data balita
-
-                    canvas.before:
-                        Color:
-                            rgba: 0.9, 1, 0.7, 1  # Warna latar hijau muda
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
-                    Label:
-                        text: "ibu Sulastri"
-                        color: 0, 0, 0, 1
-                        bold: True
-                        font_size: 20  # Mengatur ukuran font untuk label balita
-
-                    Label:
-                        text: "laweyan,Surakarta"
-                        color: 0, 0, 0, 1
-                        font_size: 20
 
         # Tombol TAMBAH di pojok kanan agak bawah
         Button:
@@ -223,11 +70,9 @@
             size_hint: None, None
             size: 100, 50
             pos_hint: {"right": 0.9, "y": 0.06}
+            background_color: (0, 0.5, 1, 0.9)
+            on_release: app.root.current = 'tambah_bumil_screen'
             color: 1, 1, 1, 1
-            radius: (50,50,50,50)
-            on_release: app.root.current = 'tambah_screen'
-
-              # Radius untuk tampilan bulat
 
         BoxLayout:
             id: sidebar
@@ -246,7 +91,7 @@
             # Konten sidebar
             Button:
                 text: "Dashboard"
-                bold:True
+                bold: True
                 color: 1, 1, 1, 1  # Warna teks putih
                 size_hint_y: None
                 height: '50dp'
@@ -257,83 +102,90 @@
                 valign: 'middle'  # Meratakan teks ke tengah vertikal
                 padding_x: 10  # Menambahkan jarak pada sisi kiri
                 on_release: 
-                    app.root.current = 'dashboard_screen'
+                    app.root.current = 'dashlog_screen'
                     root.hide_sidebar()
+  
             Button:
                 text: "Balita"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
+                bold: True
+                color: 1, 1, 1, 1
                 size_hint_y: None
                 height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
                 on_release: 
                     app.root.current = 'balita_screen'
                     root.hide_sidebar()
+
             Button:
                 text: "Perkembangan Balita"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
+                bold: True
+                color: 1, 1, 1, 1
                 size_hint_y: None
                 height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
                 on_release: 
-                    app.root.current = 'balita_screen'  
-                    root.hide_sidebar()      
+                    app.root.current = 'updatebalita_screen'  
+                    root.hide_sidebar()
+
             Button:
                 text: "Ibu Hamil"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
+                bold: True
+                color: 1, 1, 1, 1
                 size_hint_y: None
                 height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
                 on_release:
                     app.root.current = 'bumil_screen'  
                     root.hide_sidebar()
+
             Button:
-                text: "Laporan "
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
+                text: "Laporan"
+                bold: True
+                color: 1, 1, 1, 1
                 size_hint_y: None
                 height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
                 on_release: 
                     app.root.current = 'laporan_screen'   
-                    root.hide_sidebar()      
+                    root.hide_sidebar() 
+
             Button:
                 text: "Profil"
-                bold:True
-                color: 1, 1, 1, 1  # Warna teks putih
+                bold: True
+                color: 1, 1, 1, 1
                 size_hint_y: None
                 height: '50dp'
-                background_color: 0, 0, 0, 0  # Latar belakang transparan
-                background_normal: ''  # Menghilangkan gambar default pada tombol
-                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
-                halign: 'left'  # Meratakan teks ke kiri
-                valign: 'middle'  # Meratakan teks ke tengah vertikal
-                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
                 on_release:
                     app.root.current = 'profil_screen' 
-                    root.hide_sidebar()       
+                    root.hide_sidebar()
+
             Widget:
                 size_hint_y: None
                 height: 450
+   
