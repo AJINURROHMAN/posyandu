@@ -10,13 +10,13 @@ from kivy.uix.popup import Popup
 Builder.load_file('tambah.kv')
 
 class TambahScreen(Screen):
-    def simpan_data(self):
+    def simpan_data_balita(self):
         # Ambil data dari field input
         nama = self.ids.nama.text
         ibu = self.ids.ibu.text
         umur = self.ids.umur.text
         telepon = self.ids.telepon.text
-
+       
         # Validasi input
         if not nama or not ibu or not umur or not telepon:
             self.show_popup("Semua field harus diisi!")
@@ -27,7 +27,7 @@ class TambahScreen(Screen):
             username = App.get_running_app().user
 
             # Simpan data ke Firebase
-            App.get_running_app().database.simpan_data(username, nama, ibu, umur, telepon)
+            App.get_running_app().database.simpan_data_balita(username, nama, ibu, umur, telepon)
             self.show_popup("Data berhasil disimpan!")
 
             # Kosongkan field setelah simpan
@@ -35,6 +35,7 @@ class TambahScreen(Screen):
             self.ids.ibu.text = ''
             self.ids.umur.text = ''
             self.ids.telepon.text = ''
+          
             
             # Alihkan ke halaman BalitaScreen
             self.manager.current = 'balita_screen'

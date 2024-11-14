@@ -5,13 +5,18 @@ from kivy.clock import Clock
 class DashlogScreen(Screen):
     sidebar_visible = False  # Status sidebar
     sidebar_open = False  # Status sidebar
+    popup_shown = False
 
     def on_enter(self):
-        # Pastikan popup muncul setelah layar dimasukkan
-        print( 'show pop up on_enter')
-        
-        Clock.schedule_once(self.show_popup, 0)  # Delay sedikit agar popup dapat ditampilkan setelah layar muncul
-
+        # Cek apakah popup sudah pernah ditampilkan
+        if not self.popup_shown:
+            print('show pop up on_enter')
+            Clock.schedule_once(self.show_popup, 0)
+            self.popup_shown = True  # Delay sedikit agar popup dapat ditampilkan setelah layar muncul
+            
+     # waktu swipe otomatis
+        Clock.schedule_interval(self.change_carousel_image, 3)
+    
     def show_popup(self, dt):
         # Mengatur opacity popup ke 0 (tersembunyi)
         self.ids.popup_box.opacity = 0
@@ -40,3 +45,7 @@ class DashlogScreen(Screen):
         anim = Animation(x=-self.ids.sidebar.width, duration=0.3)
         anim.start(self.ids.sidebar)
         self.sidebar_open = False
+    def change_carousel_image(self, dt):
+        # Berganti ke gambar berikutnya dalam Carousel
+        carousel = self.ids.calendar_carousel
+        carousel.load_next() 

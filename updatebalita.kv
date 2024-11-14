@@ -1,4 +1,4 @@
-<BalitaScreen>:
+<UpdateBalitaScreen>:
     FloatLayout:
         canvas.before:
             Color:
@@ -7,7 +7,7 @@
                 pos: self.pos
                 size: self.size
         Label:
-            text: "Data Balita"
+            text: "Perkembangan Balita"
             font_size: 28
             bold: True
             color: 0, 0, 0, 1  # Warna teks hitam
@@ -73,7 +73,7 @@
             size: 100, 50
             pos_hint: {"right": 0.9, "y": 0.06}
             background_color: (0, 0.5, 1, 0.9)
-            on_release: app.root.current = 'tambah_screen'
+            on_release: app.root.current = 'adddata_screen'
             color: 1, 1, 1, 1
 
         BoxLayout:

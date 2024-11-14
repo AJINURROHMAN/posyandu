@@ -10,22 +10,26 @@ Window.size = (360, 640)
 # Load file login.kv dan file-file lainnya (jika ada)
 Builder.load_file('login.kv')
 Builder.load_file('profil.kv')
-Builder.load_file('dashboard.kv')
+# Builder.load_file('dashboard.kv')
 Builder.load_file('logout.kv')
 Builder.load_file('tambah.kv')
 Builder.load_file('balita.kv')
 Builder.load_file('dashlog.kv')
 Builder.load_file('bumil.kv')
+Builder.load_file('updatebalita.kv')
+Builder.load_file('adddata.kv')
 
 from login import LoginScreen
 from logout import LogoutScreen
 from dashlog import DashlogScreen
-from dashboard import DashboardScreen
+# from dashboard import DashboardScreen
 from balita import BalitaScreen
 from tambah import TambahScreen
 from profil import ProfilScreen
 from bumil import BumilScreen
 from tambah_bumil import TambahBumilScreen
+from adddata import AddDataScreen
+from updatebalita import UpdateBalitaScreen
 
 class MainApp(App):
     def __init__(self,):
@@ -35,15 +39,18 @@ class MainApp(App):
 
     def build(self):
         sm = ScreenManager()
+        sm.add_widget(UpdateBalitaScreen(name='updatebalita_screen'))
+       
         sm.add_widget(LoginScreen(name='login_screen'))   # Nama screen untuk login
-        sm.add_widget(DashboardScreen(name='dashboard_screen'))  # Nama screen untuk beranda
         sm.add_widget(ProfilScreen(name='profil_screen'))  # Nama screen untuk profil
         sm.add_widget(TambahScreen(name='tambah_screen'))
-        sm.add_widget(BalitaScreen(name='balita_screen'))
+        # sm.add_widget(DashboardScreen(name='dashboard_screen'))  # Nama screen untuk beranda
+        sm.add_widget(BalitaScreen(name='balita_screen')) 
         sm.add_widget(LogoutScreen(name='logout_screen'))
         sm.add_widget(DashlogScreen(name='dashlog_screen'))
         sm.add_widget(BumilScreen(name='bumil_screen'))
         sm.add_widget(TambahBumilScreen(name='tambah_bumil_screen'))
+        sm.add_widget(AddDataScreen(name='adddata_screen'))
         return sm
 
 if __name__ == '__main__':

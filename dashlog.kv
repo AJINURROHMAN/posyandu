@@ -87,10 +87,43 @@
                     RoundedRectangle:
                         pos: self.pos
                         size: self.size
-                Image:
-                    source: 'assets/date.png'
+
+                Carousel:
+                    id: calendar_carousel  # ID untuk mengakses carousel
                     allow_stretch: True
-                    keep_ratio: False
+                    loop: True  # Untuk membuat gambar bergerak secara terus-menerus
+
+                    Image:
+                        source: 'assets/foto.png'
+                        allow_stretch: True
+                        keep_ratio: False
+                        size_hint: None, None
+                        width: 300  # Sesuaikan dengan ukuran yang diinginkan
+                        height: 200  # Sesuaikan dengan ukuran yang diinginkan
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5} 
+
+                    Image:
+                        source: 'assets/profil.png'
+                        allow_stretch: True
+                        keep_ratio: False
+                        size_hint: None, None
+                        width: 300  # Sesuaikan dengan ukuran yang diinginkan
+                        height: 200  # Sesuaikan dengan ukuran yang diinginkan
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5} 
+
+                    Image:
+                        source: 'assets/background.png'
+                        allow_stretch: True
+                        keep_ratio: False
+                        size_hint: None, None
+                        width: 300  # Sesuaikan dengan ukuran yang diinginkan
+                        height: 200  # Sesuaikan dengan ukuran yang diinginkan
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5} 
+
+                    # Anda bisa menambahkan lebih banyak gambar sesuai kebutuhan
+            Widget:
+                size_hint_y: None
+                height: 150
 
         # Popup Box untuk animasi
         BoxLayout:
@@ -126,13 +159,107 @@
             x: -self.width
             canvas.before:
                 Color:
-                    rgba: 0, 0.75, 1, 1
+                    rgba: 0, 0.5, 1, 0.9
                 Rectangle:
                     pos: self.pos
                     size: self.size
 
             # Sidebar buttons here...
+            Button:
+                text: "Dashboard"
+                bold: True
+                color: 1, 1, 1, 1  # Warna teks putih
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0  # Latar belakang transparan
+                background_normal: ''  # Menghilangkan gambar default pada tombol
+                text_size: self.width, None  # Menyesuaikan lebar teks dengan lebar tombol
+                halign: 'left'  # Meratakan teks ke kiri
+                valign: 'middle'  # Meratakan teks ke tengah vertikal
+                padding_x: 10  # Menambahkan jarak pada sisi kiri
+                on_release: 
+                    app.root.current = 'dashlog_screen'
+                    root.hide_sidebar()
+  
+            Button:
+                text: "Balita"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release: 
+                    app.root.current = 'balita_screen'
+                    root.hide_sidebar()
 
+            Button:
+                text: "Perkembangan Balita"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release: 
+                    app.root.current = 'updatebalita_screen'  
+                    root.hide_sidebar()
+
+            Button:
+                text: "Ibu Hamil"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release:
+                    app.root.current = 'bumil_screen'  
+                    root.hide_sidebar()
+
+            Button:
+                text: "Laporan"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release: 
+                    app.root.current = 'laporan_screen'   
+                    root.hide_sidebar() 
+
+            Button:
+                text: "Profil"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release:
+                    app.root.current = 'profil_screen' 
+                    root.hide_sidebar()
 
     
 
