@@ -39,18 +39,19 @@ class MainApp(App):
 
     def build(self):
         sm = ScreenManager()
-        sm.add_widget(UpdateBalitaScreen(name='updatebalita_screen'))
        
+        sm.add_widget(DashlogScreen(name='dashlog_screen'))
         sm.add_widget(LoginScreen(name='login_screen'))   # Nama screen untuk login
         sm.add_widget(ProfilScreen(name='profil_screen'))  # Nama screen untuk profil
         sm.add_widget(TambahScreen(name='tambah_screen'))
         # sm.add_widget(DashboardScreen(name='dashboard_screen'))  # Nama screen untuk beranda
         sm.add_widget(BalitaScreen(name='balita_screen')) 
-        sm.add_widget(LogoutScreen(name='logout_screen'))
-        sm.add_widget(DashlogScreen(name='dashlog_screen'))
         sm.add_widget(BumilScreen(name='bumil_screen'))
         sm.add_widget(TambahBumilScreen(name='tambah_bumil_screen'))
+        sm.add_widget(LogoutScreen(name='logout_screen'))
         sm.add_widget(AddDataScreen(name='adddata_screen'))
+        sm.add_widget(UpdateBalitaScreen(name='updatebalita_screen'))
+        
         return sm
 
 if __name__ == '__main__':

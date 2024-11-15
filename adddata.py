@@ -16,14 +16,14 @@ class CustomTextInput(TextInput):
 class AddDataScreen(Screen):
     def simpan_data_perkembangan(self):
         # Ambil data dari field input
-        nama = self.ids.nama.text
-        berat = self.ids.berat.text
-        lingkark = self.ids.lingkark.text  # Sesuaikan dengan ID yang ada di adddata.kv
-        tinggi = self.ids.tinggi.text
-        lingkarl = self.ids.lingkarl.text  # Sesuaikan dengan ID yang ada di adddata.kv
+        Nama = self.ids.nama.text
+        Berat = self.ids.berat.text
+        Lingkar_K = self.ids.lingkark.text  # Sesuaikan dengan ID yang ada di adddata.kv
+        Tinggi = self.ids.tinggi.text
+        Lingkar_l = self.ids.lingkarl.text  # Sesuaikan dengan ID yang ada di adddata.kv
         
         # Validasi input
-        if not nama or not berat or not lingkark or not tinggi or not lingkarl:
+        if not Nama or not Berat or not Lingkar_K or not Tinggi or not Lingkar_l:
             self.show_popup("Semua field harus diisi!")
             return
 
@@ -32,7 +32,7 @@ class AddDataScreen(Screen):
             username = App.get_running_app().user
 
             # Simpan data ke Firebase
-            App.get_running_app().database.simpan_data_perkembangan(username, nama, berat, tinggi, lingkark, lingkarl)
+            App.get_running_app().database.simpan_data_perkembangan(username, Nama, Berat, Tinggi, Lingkar_K, Lingkar_l)
             self.show_popup("Data berhasil disimpan!")
 
             # Kosongkan field setelah simpan

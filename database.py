@@ -98,9 +98,9 @@ class Database:
         data = {
             "Nama": nama,
             "Berat": berat,
-            "Lingkar": lingkarK,
+            "Lingkar_K": lingkarK,
             "Tinggi": tinggi,
-            "Lingkar": lingkarl
+            "Lingkar_l": lingkarl
         }
         # Simpan ke Firebase dengan ID unik untuk setiap entri
         self.db.child("adddata").child(username).push(data)  # Menggunakan push untuk menambahkan entri baru

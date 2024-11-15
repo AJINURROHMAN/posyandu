@@ -9,6 +9,7 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.graphics import RoundedRectangle
 from kivy.uix.button import Button
 from kivy.utils import get_color_from_hex
+import random
 
 
 
@@ -34,10 +35,6 @@ class BumilScreen(Screen):
 
         # Warna bergantian untuk setiap data balita
         colors = [
-            # get_color_from_hex("#AEDFF7"),  # Biru muda
-            # get_color_from_hex("#F7DFAE"),  # Kuning muda
-            # get_color_from_hex("#F4B6C2"),  # Merah muda
-            # get_color_from_hex("#D4E157")   # Hijau muda
             get_color_from_hex("#82B1FF"),  # Biru Muda Terang
             get_color_from_hex("#FFD180") , # Peach Terang
             get_color_from_hex("#FF9E80") , # Merah Muda Salmon
@@ -150,23 +147,34 @@ class BumilScreen(Screen):
         database = App.get_running_app().database
         data_bumil = database.db.child("bumil").child("user1").get()
 
+        # Daftar warna untuk tombol
+        colors = [
+            get_color_from_hex("#82B1FF"),  # Biru Muda Terang
+            get_color_from_hex("#FFD180"),  # Peach Terang
+            get_color_from_hex("#FF9E80"),  # Merah Muda Salmon
+            get_color_from_hex("#B9F6CA"),  # Hijau Mint Cerah
+            get_color_from_hex("#FFEB3B")   # Kuning Cerah
+        ]
+
         if data_bumil is not None and data_bumil.each() is not None:
-            for balita in data_bumil.each():
+            for index,balita in data_bumil.each():
                 info = balita.val()
                 if all(key in info for key in ['nama', 'suami', 'alamat', 'telepon']):
                     if search_text.lower() in info['nama'].lower():  # Pencarian berdasarkan nama
                         container = BoxLayout(orientation='vertical', padding=10, size_hint_y=None, height=170)
                         container.balita_info = info
 
+                        # Pilih warna acak dari daftar
+                       
+
                         button = Button(
                             text=f"[b]{info['nama']}[/b]\n[b]{info['alamat']}[/b]",
                             size_hint_y=None,
                             height=150,
                             font_size=20,
-                            
                             color=(1, 1, 1, 1),
                             background_normal='',
-                            background_color=(0.82, 0.82, 0.82, 1),  # Warna tetap
+                            background_color=colors[index % len(colors)], # Gunakan warna acak
                             markup=True
                         )
                         button.bind(on_release=self.show_details)

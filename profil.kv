@@ -6,7 +6,14 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-
+        Button:
+            background_normal: 'assets/hamb.png'
+            size_hint: None, None
+            size: 70, 70
+            pos: 20, root.height - 70
+            allow_stretch: True
+            keep_ratio: True
+            on_press: root.toggle_sidebar()
         # Bagian Profil
         FloatLayout:
             Image:
@@ -74,7 +81,7 @@
                     size_hint_y: None
                     pos_hint: {'center_x': 0.5}
                     height: '40dp'
-                    on_release: 'login_screen'
+                    on_press: app.root.current = 'logout_screen'
 
         # Sidebar
         BoxLayout:
@@ -100,21 +107,95 @@
                 height: '50dp'
                 background_color: 0, 0, 0, 0
                 background_normal: ''
+                text_size: self.width, None
                 halign: 'left'
                 valign: 'middle'
                 padding_x: 10
                 on_release:
                     app.root.current = 'dashlog_screen'
                     root.hide_sidebar()
+            Button:
+                text: "Balita"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release: 
+                    app.root.current = 'balita_screen'
+                    root.hide_sidebar()
 
-            # Tambahan tombol lainnya disini
-            # Tombol lain dapat ditambahkan dengan format yang sama
+            Button:
+                text: "Perkembangan Balita"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release: 
+                    app.root.current = 'updatebalita_screen'  
+                    root.hide_sidebar()
 
-        Button:
-            background_normal: 'assets/hamb.png'
-            size_hint: None, None
-            size: 70, 70
-            pos: 20, root.height - 70
-            allow_stretch: True
-            keep_ratio: True
-            on_press: root.toggle_sidebar()
+            Button:
+                text: "Ibu Hamil"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release:
+                    app.root.current = 'bumil_screen'  
+                    root.hide_sidebar()
+
+            Button:
+                text: "Laporan"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release: 
+                    app.root.current = 'laporan_screen'   
+                    root.hide_sidebar() 
+
+            Button:
+                text: "Profil"
+                bold: True
+                color: 1, 1, 1, 1
+                size_hint_y: None
+                height: '50dp'
+                background_color: 0, 0, 0, 0
+                background_normal: ''
+                text_size: self.width, None
+                halign: 'left'
+                valign: 'middle'
+                padding_x: 10
+                on_release:
+                    app.root.current = 'profil_screen' 
+                    root.hide_sidebar()
+            
+            Widget:
+                size_hint_y: None
+                height: 450
+
+       

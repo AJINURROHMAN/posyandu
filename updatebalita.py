@@ -5,10 +5,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.animation import Animation
 from kivy.uix.behaviors import ButtonBehavior
-from kivy.graphics import RoundedRectangle
 from kivy.uix.button import Button
-from kivy.uix.textinput import TextInput
 from kivy.utils import get_color_from_hex
+import random
 
 # Subclass ButtonBehavior untuk menambahkan klik ke BoxLayout
 class ClickableBox(ButtonBehavior, BoxLayout):
@@ -25,8 +24,6 @@ class UpdateBalitaScreen(Screen):
         self.ids.data_container.clear_widgets()
         database = App.get_running_app().database
         data_adddata = database.db.child("adddata").child("user1").get()
-        print("UpdateBalitaScreen jjj")
-        
         
         colors = [
             get_color_from_hex("#82B1FF"),
@@ -40,14 +37,13 @@ class UpdateBalitaScreen(Screen):
             print(f"isi data {data_adddata}")
             
             for index, updatebalita in enumerate(data_adddata.each()):
-                
                 info = updatebalita.val()
-                if all(key in info for key in ['nama', 'berat', 'lingkar_k', 'tinggi', 'lingkar_l']):
+                if all(key in info for key in ['Nama', 'Berat', 'Lingkar_K', 'Tinggi', 'Lingkar_l']):
                     container = BoxLayout(orientation='vertical', padding=10, size_hint_y=None, height=170)
-                    container.balita_info = info
+                    container.updatebalita_info = info
 
                     button = Button(
-                        text=f"{info['nama']}\nBerat: {info['berat']}",
+                        text=f"{info['Nama']}\nBerat: {info['Berat']}",
                         size_hint_y=None,
                         height=150,
                         font_size=25,
@@ -68,19 +64,33 @@ class UpdateBalitaScreen(Screen):
             self.ids.data_container.add_widget(Label(text="Tidak ada data balita yang ditemukan.", color=(0, 0, 0, 1)))
 
     def show_details(self, instance):
-        info = instance.balita_info
+        info = instance.updatebalita_info
         main_layout = BoxLayout(orientation='vertical', spacing=10, padding=[20, 20, 20, 10])
         text_layout = BoxLayout(orientation='vertical', spacing=10)
 
-        text_layout.add_widget(Label(text=f"Nama: {info['nama']}", color=(1, 1, 1, 1), font_size=18))
-        text_layout.add_widget(Label(text=f"Tinggi: {info['tinggi']}", color=(1, 1, 1, 1), font_size=18))
-        text_layout.add_widget(Label(text=f"Berat: {info['berat']}", color=(1, 1, 1, 1), font_size=18))
-        text_layout.add_widget(Label(text=f"LingkarK: {info['lingkar_k']}", color=(1, 1, 1, 1), font_size=18))
-        text_layout.add_widget(Label(text=f"LingkarL: {info['lingkar_l']}", color=(1, 1, 1, 1), font_size=18))
+        text_layout.add_widget(Label(
+            text=f"Nama:\n {info['Nama']}", color=(1, 1, 1, 1), font_size=18,halign="center",valign="middle"))
+        text_layout.add_widget(Label(
+            text=f"Tinggi:\n {info['Tinggi']}", color=(1, 1, 1, 1), font_size=18,halign="center",valign="middle"))
+        text_layout.add_widget(Label(
+            text=f"Berat:\n {info['Berat']}", color=(1, 1, 1, 1), font_size=18,halign="center",valign="middle"))
+        text_layout.add_widget(Label(
+            text=f"Lingkar_l:\n {info['Lingkar_l']}", color=(1, 1, 1, 1), font_size=18,halign="center",valign="middle"))
+        text_layout.add_widget(Label(
+            text=f"Lingkar_K:\n {info['Lingkar_K']}", color=(1, 1, 1, 1), font_size=18,halign="center",valign="middle"))
 
         main_layout.add_widget(text_layout)
 
-        close_button = Button(text="Tutup", size_hint=(None, None), width=120, height=45, background_color=(0.2, 0.6, 0.8, 1), color=(1, 1, 1, 1), font_size=18)
+        close_button = Button(
+            text="Tutup",
+            size_hint=(None, None),
+            width=120,
+            height=45,
+            background_normal='',
+            background_color=(0.2, 0.6, 0.8, 1),
+            color=(1, 1, 1, 1),
+            font_size=18
+        )
         close_button.bind(on_release=lambda *args: popup.dismiss())
 
         main_layout.add_widget(close_button)
@@ -92,24 +102,33 @@ class UpdateBalitaScreen(Screen):
         """Mencari data balita berdasarkan nama."""
         self.ids.data_container.clear_widgets()
         database = App.get_running_app().database
-        data_adddata = database.db.child("updatebalita").child("user1").get()
+        data_adddata = database.db.child("adddata").child("user1").get()
+
+        # Daftar warna untuk tombol
+        colors = [
+            get_color_from_hex("#82B1FF"),  # Biru Muda Terang
+            get_color_from_hex("#FFD180"),  # Peach Terang
+            get_color_from_hex("#FF9E80"),  # Merah Muda Salmon
+            get_color_from_hex("#B9F6CA"),  # Hijau Mint Cerah
+            get_color_from_hex("#FFEB3B")   # Kuning Cerah
+        ]
 
         if data_adddata is not None and data_adddata.each() is not None:
-            for data_adddata in data_adddata.each():
-                info =data_adddata.val()
-                if all(key in info for key in ['nama', 'berat', 'tinggi', 'lingkar_k', 'lingkar_l']):
-                    if search_text.lower() in info['nama'].lower():
+            for index, adddata in enumerate(data_adddata.each()):
+                info = adddata.val()
+                if all(key in info for key in ['Nama', 'Berat', 'Tinggi', 'Lingkar_K', 'Lingkar_l']):
+                    if search_text.lower() in info['Nama'].lower():
                         container = BoxLayout(orientation='vertical', padding=10, size_hint_y=None, height=170)
-                        container.balita_info = info
+                        container.updatebalita_info = info
 
                         button = Button(
-                            text=f"{info['nama']}\nBerat: {info['berat']}",
+                            text=f"{info['Nama']}\nBerat: {info['Berat']}",
                             size_hint_y=None,
                             height=150,
                             font_size=20,
-                            color=(1, 1, 1, 1),
-                            background_normal='',
-                            background_color=(0.82, 0.82, 0.82, 1),
+                            color=(1, 1, 1, 1),  # Warna teks putih
+                            background_normal='',  # Menghilangkan background image default
+                            background_color=colors[index % len(colors)],  # Gunakan warna bergantian
                             markup=True
                         )
                         button.bind(on_release=self.show_details)
@@ -121,6 +140,10 @@ class UpdateBalitaScreen(Screen):
                         separator = Label(size_hint_y=None, height=2)
                         self.ids.data_container.add_widget(separator)
 
+        else:
+            self.ids.data_container.add_widget(Label(text="Tidak ada data balita yang ditemukan.", color=(0, 0, 0, 1)))
+
+            
     def toggle_sidebar(self):
         if self.sidebar_open:
             self.hide_sidebar()
@@ -141,7 +164,6 @@ class MyApp(App):
     def build(self):
         sm = ScreenManager()
         sm.add_widget(UpdateBalitaScreen(name='updatebalita_screen'))
-
         return sm
 
 if __name__ == '__main__':

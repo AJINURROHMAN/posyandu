@@ -26,7 +26,6 @@ class BalitaScreen(Screen):
         self.ids.data_container.clear_widgets()
         database = App.get_running_app().database
         data_balita = database.db.child("balita").child("user1").get()
-        print('profil')
         
         colors = [
             get_color_from_hex("#82B1FF"),  # Biru Muda Terang
@@ -111,8 +110,16 @@ class BalitaScreen(Screen):
         database = App.get_running_app().database
         data_balita = database.db.child("balita").child("user1").get()
 
+        colors = [
+            get_color_from_hex("#82B1FF"),  # Biru Muda Terang
+            get_color_from_hex("#FFD180"),  # Peach Terang
+            get_color_from_hex("#FF9E80"),  # Merah Muda Salmon
+            get_color_from_hex("#B9F6CA"),  # Hijau Mint Cerah
+            get_color_from_hex("#FFEB3B")   # Kuning Cerah
+        ]
+
         if data_balita is not None and data_balita.each() is not None:
-            for balita in data_balita.each():
+            for index, balita in enumerate(data_balita.each()):
                 info = balita.val()
                 if all(key in info for key in ['nama', 'ibu', 'telepon', 'umur']):
                     if search_text.lower() in info['nama'].lower():  # Pencarian berdasarkan nama
@@ -120,14 +127,13 @@ class BalitaScreen(Screen):
                         container.balita_info = info
 
                         button = Button(
-                            text=f"[b]{info['nama']}[/b]\n[b]{info['umur']}[/b]",
+                            text=f"[b]{info['nama']}[/b]\nUmur: {info['umur']}",
                             size_hint_y=None,
                             height=150,
                             font_size=20,
-                            
                             color=(1, 1, 1, 1),
                             background_normal='',
-                            background_color=(0.82, 0.82, 0.82, 1),  # Warna tetap
+                            background_color=colors[index % len(colors)],
                             markup=True
                         )
                         button.bind(on_release=self.show_details)
@@ -141,7 +147,7 @@ class BalitaScreen(Screen):
 
         else:
             self.ids.data_container.add_widget(Label(text="Tidak ada data balita yang ditemukan.", color=(0, 0, 0, 1)))
-        
+
     def toggle_sidebar(self):
         if self.sidebar_open:
             self.hide_sidebar()
